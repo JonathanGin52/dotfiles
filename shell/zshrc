@@ -1,0 +1,58 @@
+export ZSH="/Users/jonathan/.oh-my-zsh"
+
+ZSH_THEME="powerlevel9k/powerlevel9k"
+DEFAULT_USER="jonathan"
+
+POWERLEVEL9K_MODE='awesome-patched'
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(status context dir dir_writable vcs)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(time)
+POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
+POWERLEVEL9K_HOME_ICON=''
+POWERLEVEL9K_HOME_SUB_ICON=''
+POWERLEVEL9K_FOLDER_ICON=''
+POWERLEVEL9K_ETC_ICON=''
+POWERLEVEL9K_DIR_WRITABLE_FORBIDDEN_FOREGROUND="white"
+POWERLEVEL9K_STATUS_VERBOSE=false
+POWERLEVEL9K_TIME_BACKGROUND="black"
+POWERLEVEL9K_TIME_FOREGROUND="249"
+POWERLEVEL9K_TIME_FORMAT="%D{%H:%M}"
+#POWERLEVEL9K_COLOR_SCHEME='light'
+POWERLEVEL9K_VCS_GIT_ICON='\uE1AA'
+POWERLEVEL9K_VCS_GIT_GITHUB_ICON='\uE1AA'
+POWERLEVEL9K_HIDE_BRANCH_ICON=true
+
+plugins=(
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+  git
+  osx
+  z
+)
+
+source $ZSH/oh-my-zsh.sh
+# Terminal title
+DISABLE_AUTO_TITLE="true"
+function _set_terminal_title() {
+	local title="$(basename "$PWD")"
+	if [[ -n $SSH_CONNECTION ]]; then
+		title="$title \xE2\x80\x94 $HOSTNAME"
+	fi
+	echo -ne "\033];$title\007"
+}
+precmd_functions+=(_set_terminal_title)
+
+echo "Welcome back, Jonathan."
+
+if [[ -f /opt/dev/dev.sh ]]; then source /opt/dev/dev.sh; fi
+[[ -s /Users/jonathan/.nvm/nvm.sh ]] && . /Users/jonathan/.nvm/nvm.sh  # This loads NVM
+alias hgrep='history | grep --color=auto'
+alias pipup='pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U'
+alias pip3up='pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip3 install -U'
+alias cleanupds='find . -type f -name '*.DS_Store' -ls -delete'
+alias update_all="sudo softwareupdate --install --all \
+                    && brew update \
+                    && brew upgrade \
+                    && brew cleanup \
+                    && npm install -g npm \
+                    && npm update -g"
+export PATH="/usr/local/opt/ruby/bin:$PATH"
