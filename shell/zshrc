@@ -14,7 +14,7 @@ source $CURRENT_DIRECTORY/zsh/plugins.zsh
 source $CURRENT_DIRECTORY/zsh/theme.zsh
 
 # Load extra (local) settings
-[ -f ~/.zshlocal ] && source ~/.zshlocal
+[ -f ~/.zshrclocal ] && source ~/.zshrclocal
 
 # oh-my-zsh
 source $ZSH/oh-my-zsh.sh
