@@ -1,0 +1,17 @@
+[user]
+	name = Jonathan Gin
+	email = jonathangin52@gmail.com
+[core]
+	editor = vim
+	excludesfile = /Users/jonathan/.gitignore_global
+[alias]
+	co = checkout
+	hist = log --graph --pretty='''%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset''' --all
+	type = cat-file -t
+	dump = cat-file -p
+[diff]
+	algorithm = patience
+[protocol]
+	version = 2
+[credential]
+	helper = osxkeychain
