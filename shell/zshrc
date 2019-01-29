@@ -13,11 +13,11 @@ source $CURRENT_DIRECTORY/zsh/plugins.zsh
 # Theme
 source $CURRENT_DIRECTORY/zsh/theme.zsh
 
+# Load extra (local) settings
+[ -f ~/.zshlocal ] && source ~/.zshlocal
+
 # oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 
 DEFAULT_USER="jonathan"
 
-if [[ -f /opt/dev/dev.sh ]]; then source /opt/dev/dev.sh; fi
-[[ -s /Users/jonathan/.nvm/nvm.sh ]] && . /Users/jonathan/.nvm/nvm.sh  # This loads NVM
-export PATH="/usr/local/opt/ruby/bin:$PATH"
