@@ -307,6 +307,7 @@ create_symlinks() {
     local i=""
     local sourceFile=""
     local targetFile=""
+    local local="local"
     local skipQuestions=false
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -333,10 +334,11 @@ create_symlinks() {
 
             if ! $skipQuestions; then
 
-                ask_for_confirmation "'$targetFile' already exists, do you want to overwrite it?"
+                ask_for_confirmation "'$targetFile' already exists, do you want to rename it it $targetFile$local?"
                 if answer_is_yes; then
 
-                    rm -rf "$targetFile"
+                    mv "$targetFile" "$targetFile$local"
+                   # rm -rf "$targetFile"
 
                     execute \
                         "ln -fs $sourceFile $targetFile" \
