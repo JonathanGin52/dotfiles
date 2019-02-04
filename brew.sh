@@ -17,6 +17,7 @@ brew upgrade
 brew install git
 brew install node # This also installs `npm` using the recommended installation method
 brew install bat
+brew install tldr
 brew install tree
 brew install vim --with-override-system-vi
 brew install heroku/brew/heroku
