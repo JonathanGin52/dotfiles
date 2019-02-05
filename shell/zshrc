@@ -1,5 +1,5 @@
 CURRENT_DIRECTORY=`dirname $(readlink ~/.zshrc)`
-export ZSH="/Users/jonathan/.oh-my-zsh"
+export ZSH="/Users/${USER}/.oh-my-zsh"
 
 # Aliases
 source $CURRENT_DIRECTORY/zsh/aliases.zsh
