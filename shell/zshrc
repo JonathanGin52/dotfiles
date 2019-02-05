@@ -18,6 +18,6 @@ source $CURRENT_DIRECTORY/zsh/theme.zsh
 
 # oh-my-zsh
 source $ZSH/oh-my-zsh.sh
-
-DEFAULT_USER="jonathan"
+autoload -U promptinit; promptinit
+prompt pure
 
