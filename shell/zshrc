@@ -20,4 +20,5 @@ source $CURRENT_DIRECTORY/zsh/theme.zsh
 source $ZSH/oh-my-zsh.sh
 autoload -U promptinit; promptinit
 prompt pure
+PROMPT='%(?.%F{green}.%F{red})❯%f '
 
