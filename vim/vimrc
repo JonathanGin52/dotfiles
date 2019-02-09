@@ -16,11 +16,15 @@ endif
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
-set expandtab "turns tabs into spaces
+set expandtab " Turns tabs into spaces
 autocmd FileType html setlocal ts=2 sts=2 sw=2
 autocmd FileType javascript setlocal ts=2 sts=2 sw=2
 autocmd FileType json setlocal ts=2 sts=2 sw=2
 autocmd FileType css setlocal ts=2 sts=2 sw=2
+
+" UI config
+set number
+set showcmd
 
 " NETRW settings
 let g:netrw_liststyle = 3 " Show tree view
@@ -51,9 +55,11 @@ augroup markdownSpell
     autocmd BufRead,BufNewFile *.md setlocal spell
 augroup END
 
-" UI config
-set number
-set showcmd
+" Markdown Preview settings
+let vim_markdown_preview_toggle=2
+let vim_markdown_preview_github=1
+let vim_markdown_preview_temp_file=1
+let vim_markdown_preview_browser='Google Chrome'
 
 " Custom Keymaps
 " Remap esc to hh
@@ -62,12 +68,6 @@ let mapleader = "\<Space>"
 
 " Emmet settings
 let g:user_emmet_leader_key=','
-
-" Markdown Preview settings
-let vim_markdown_preview_toggle=2
-let vim_markdown_preview_github=1
-let vim_markdown_preview_temp_file=1
-let vim_markdown_preview_browser='Google Chrome'
 
 " Vim Hardmode settings
 let g:hardtime_default_on = 1
@@ -83,3 +83,4 @@ Plug 'JamshedVesuna/vim-markdown-preview'
 " Vim HardTime
 Plug 'takac/vim-hardtime'
 call plug#end()
+
