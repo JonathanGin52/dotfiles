@@ -18,6 +18,8 @@ source $CURRENT_DIRECTORY/zsh/theme.zsh
 
 # oh-my-zsh
 source $ZSH/oh-my-zsh.sh
+
+# Pure prompt theme config
 autoload -U promptinit; promptinit
 prompt pure
 PROMPT='%(?.%F{green}.%F{red})❯%f '
