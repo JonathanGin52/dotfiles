@@ -13,27 +13,8 @@ brew update
 # Upgrade any existing formulae
 brew upgrade
 
-# Install useful binaries
-brew install git
-brew install node # This also installs `npm` using the recommended installation method
-brew install bat
-brew install tldr
-brew install tree
-brew install vim --with-override-system-vi
-brew install heroku/brew/heroku
-
-# Install Python
-brew install python
-brew install python3
-
-# Install casks
-brew cask install iterm2
-brew cask install flux
-brew cask install google-chrome
-brew cask install spotify
-brew cask install caprine
-brew cask install slack
-brew cask install docker
+# Install from Brewfile
+brew bundle
 
 # Remove outdated versions from the cellar
 brew cleanup
