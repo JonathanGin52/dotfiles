@@ -1,4 +1,6 @@
 #!/bin/bash
+# Author: @alrra
+# https://github.com/alrra/dotfiles
 
 answer_is_yes() {
     [[ "$REPLY" =~ ^[Yy]$ ]] \
