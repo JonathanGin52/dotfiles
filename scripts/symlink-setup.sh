@@ -7,6 +7,7 @@ create_symlinks() {
 
     declare -a FILES_TO_SYMLINK=(
 
+        "shell/tmux.conf"
         "shell/curlrc"
         "shell/zshrc"
 
