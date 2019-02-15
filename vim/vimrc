@@ -61,19 +61,50 @@ let vim_markdown_preview_github=1
 let vim_markdown_preview_temp_file=1
 let vim_markdown_preview_browser='Google Chrome'
 
+" Lightline
+let g:lightline = {
+\   'colorscheme': 'onedark',
+\   'active': {
+\     'left':[ [ 'mode', 'paste' ],
+\              [ 'gitbranch', 'readonly', 'filename', 'modified' ]
+\     ]
+\   },
+\   'component_function': {
+\     'gitbranch': 'fugitive#head',
+\   }
+\ }
+let g:lightline.separator = {
+\   'left': '', 'right': ''
+\}
+let g:lightline.subseparator = {
+\   'left': '', 'right': ''
+\}
+set noshowmode
+set laststatus=2
+
 " Custom Keymaps
 " Remap esc to hh
 inoremap hh <ESC>
 let mapleader = "\<Space>"
 
+" Toggle a file explorer
+nnoremap <silent> <leader>e :Lex<cr>
+
+" Create splits with <leader>[-|], they look like the split they create
+map <silent> <leader>\| :vsplit<cr>
+map <silent> <leader>- :split<cr>
+" Display the content of registers
+nnoremap <silent> <leader>@ :registers<cr>
+
 " Emmet settings
 let g:user_emmet_leader_key=','
 
 " Vim Hardmode settings
-let g:hardtime_default_on = 1
+let g:hardtime_default_on=0
 
 " Plugin manager
 call plug#begin('~/.vim/plugged')
+Plug 'itchyny/lightline.vim'
 Plug 'mattn/emmet-vim'
 Plug 'vim-ruby/vim-ruby'
 Plug 'pangloss/vim-javascript'
@@ -81,6 +112,7 @@ Plug 'mxw/vim-jsx'
 Plug 'kaicataldo/material.vim'
 Plug 'JamshedVesuna/vim-markdown-preview'
 Plug 'tpope/vim-vinegar'
+Plug 'tpope/vim-fugitive'
 " Vim HardTime
 Plug 'takac/vim-hardtime'
 Plug 'joshdick/onedark.vim'
