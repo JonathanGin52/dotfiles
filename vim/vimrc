@@ -83,5 +83,6 @@ Plug 'JamshedVesuna/vim-markdown-preview'
 Plug 'tpope/vim-vinegar'
 " Vim HardTime
 Plug 'takac/vim-hardtime'
+Plug 'joshdick/onedark.vim'
 call plug#end()
 
