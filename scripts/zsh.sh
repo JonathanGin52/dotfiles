@@ -3,6 +3,9 @@
 # Install zsh
 brew info zsh | grep --quiet 'Not installed' && brew install zsh
 
+# Install iterm2
+brew cask info iterm2 | grep --quiet 'Not installed' && brew cask install iterm2
+
 # Install Oh My Zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
