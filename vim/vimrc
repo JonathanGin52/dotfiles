@@ -1,22 +1,30 @@
 " =====================================================
-" => Basics
+" => General
 " =====================================================
 set nocompatible                                           " Use vim, not vi
+syntax on                                                  " Enable syntax highlighting
 filetype on                                                " Enable filetype detection
 filetype indent on                                         " Enable filetype-specific indenting
 filetype plugin on                                         " Enable filetype-specific plugins
-syntax on                                                  " Enable syntax highlighting
 set history=500                                            " Sets how many lines of history vim has to remember
 set autoread                                               " Automatically read external changes
+set scrolloff=5                                            " Enable always showing 5 lines above/below the cursor position
 
-" =====================================================
-" => Tabs and spaces config
-" =====================================================
+" More natural splitting
+set splitbelow                                             " Open new splits below the current active one
+set splitright                                             " Open new splits to the right of the current active one
+
+" Searching
+set ignorecase                                             " Ignore case in search
+set smartcase                                              " But case-sensitive if expression contains a capital letter
+
+" -----------------------------------------------------
+" Tabs and spaces
+" -----------------------------------------------------
 set tabstop=2
 set softtabstop=2
 set shiftwidth=2
 set expandtab                                              " Turns tabs into spaces
-set scrolloff=5                                            " Enable always showing 5 lines above/below the cursor position
 autocmd FileType java setlocal ts=4 sts=4 sw=4
 autocmd FileType c setlocal ts=4 sts=4 sw=4
 
@@ -28,13 +36,6 @@ set showcmd                                                " Show the command as
 set showmatch                                              " Highlight matching [{()}]
 set lazyredraw                                             " Don't redraw the screen while exectuting macros
 set noshowmode                                             " Disable showing the mode in the status line
-
-" More natural splitting
-set splitbelow                                             " Open new splits below the current active one
-set splitright                                             " Open new splits to the right of the current active one
-
-set ignorecase                                             " Ignore case in search
-set smartcase                                              " But case-sensitive if expression contains a capital letter
 
 " -----------------------------------------------------
 " Colourscheme
@@ -257,13 +258,13 @@ call plug#end()
 " Plugin settings
 " -----------------------------------------------------
 " ALE
-let g:ale_sign_error='● '             " Use an solid circle symbol for errors in the sign column
-let g:ale_sign_info='‣ '              " Use a solid little arrow for 'info' in the sign column
-let g:ale_sign_warning='○ '           " Use a hollow circle symbol for warnings in the sign column
-let g:ale_sign_column_always=1        " Show the sign column even if there are no linter notes
-let g:ale_lint_on_text_changed=1      " Don't run the linter whenever the text of a file changes: fights with Deoplete
-let g:ale_lint_on_enter=1             " Run the linter whenever a file is opened
-let g:ale_lint_on_save=1              " Run the linter whenever a file is saved
+let g:ale_sign_error='● '                                  " Use an solid circle symbol for errors in the sign column
+let g:ale_sign_info='‣ '                                   " Use a solid little arrow for 'info' in the sign column
+let g:ale_sign_warning='○ '                                " Use a hollow circle symbol for warnings in the sign column
+let g:ale_sign_column_always=1                             " Show the sign column even if there are no linter notes
+let g:ale_lint_on_text_changed=1                           " Don't run the linter whenever the text of a file changes: fights with Deoplete
+let g:ale_lint_on_enter=1                                  " Run the linter whenever a file is opened
+let g:ale_lint_on_save=1                                   " Run the linter whenever a file is saved
 
 " It may be nice to highlight the actual error here too - drop the 'sign' part
 highlight ALEErrorSign        ctermfg=1
