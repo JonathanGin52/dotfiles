@@ -21,6 +21,10 @@ git -C ~/.oh-my-zsh/custom/themes clone https://github.com/bhilburn/powerlevel9k
 # Install fonts
 cp "Source Code Pro for Powerline.otf" ~/Library/Fonts
 
+# Install italics support in terminal and tmux
+tic -x xterm-256color-italic.terminfo
+tic -x tmux-256color-italic.terminfo
+
 # Copy iterm2 settings
 cp com.googlecode.iterm2.plist ~/Library/Preferences/com.googlecode.iterm2.plist
 
