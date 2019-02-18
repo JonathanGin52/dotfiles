@@ -40,11 +40,18 @@ set noshowmode                                             " Disable showing the
 " -----------------------------------------------------
 " Colourscheme
 " -----------------------------------------------------
-set background=dark
-colorscheme onedark
+set background=dark                                        " Dark mode is always better
 if (has("termguicolors"))
   set termguicolors
+  " Vim-specific sequences for RGB colours
+  let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
 endif
+
+" Onedark config
+let g:onedark_hide_endofbuffer=1                           " Hide end-of-buffer lines (~)
+let g:onedark_terminal_italics=1                           " Italicize comments
+colorscheme onedark
 
 " -----------------------------------------------------
 " Statusline
@@ -90,7 +97,7 @@ set statusline+=%3p%%\ \                                   " Percentage through 
 let g:netrw_banner=0                                       " Remove useless banner
 let g:netrw_liststyle=3                                    " Show tree view
 let g:netrw_winsize=-35                                    " Set width of explorer to 35 columns
-let g:netrw_browse_split=4                                 " Open the selected file in the previous window
+"let g:netrw_browse_split=4                                 " Open the selected file in the previous window
 let g:netrw_altv=1
 autocmd FileType netrw setlocal bufhidden=delete           " Fix the tendency for NETRW to leave unmodified buffers open
 
@@ -168,6 +175,7 @@ command! W w
 command! Wq wq
 command! Wqa wqa
 command! Q q
+command! Qa qa
 
 " =====================================================
 " => Stuff that does other stuff
@@ -274,6 +282,7 @@ highlight ALEStyleErrorSign   ctermfg=3
 highlight ALEStyleWarningSign ctermfg=3
 let g:ale_fixers={
 \   'ruby': ['rubocop'],
+\   'javascript': ['eslint'],
 \}
 
 " Emmet

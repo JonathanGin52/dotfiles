@@ -1,3 +1,4 @@
+alias ssh="TERM=xterm-256color ssh"
 alias hgrep='history | grep --color=auto'
 alias cleanupds='find . -type f -name "*.DS_Store" -ls -delete'
 alias pipup='pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U'

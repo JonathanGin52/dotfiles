@@ -1,5 +1,6 @@
 CURRENT_DIRECTORY=`dirname $(readlink ~/.zshrc)`
 export ZSH="/Users/${USER}/.oh-my-zsh"
+#export TERM=xterm-256color-italic
 
 # Aliases
 source $CURRENT_DIRECTORY/zsh/aliases.zsh
