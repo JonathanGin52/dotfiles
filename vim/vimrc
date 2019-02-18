@@ -6,9 +6,11 @@ syntax on                                                  " Enable syntax highl
 filetype on                                                " Enable filetype detection
 filetype indent on                                         " Enable filetype-specific indenting
 filetype plugin on                                         " Enable filetype-specific plugins
-set history=500                                            " Sets how many lines of history vim has to remember
+set wildignorecase                                         " Ignore case sensitivity in wildmenu (like tab-completing :commands)
 set autoread                                               " Automatically read external changes
+set history=500                                            " Sets how many lines of history vim has to remember
 set scrolloff=5                                            " Enable always showing 5 lines above/below the cursor position
+set sidescrolloff=10                                       " Enable always showing 10 characters to the right of the cursor
 
 " More natural splitting
 set splitbelow                                             " Open new splits below the current active one
@@ -17,6 +19,7 @@ set splitright                                             " Open new splits to 
 " Searching
 set ignorecase                                             " Ignore case in search
 set smartcase                                              " But case-sensitive if expression contains a capital letter
+set incsearch                                              " Show matches while typing
 
 " -----------------------------------------------------
 " Tabs and spaces
@@ -36,6 +39,7 @@ set showcmd                                                " Show the command as
 set showmatch                                              " Highlight matching [{()}]
 set lazyredraw                                             " Don't redraw the screen while exectuting macros
 set noshowmode                                             " Disable showing the mode in the status line
+set nowrap                                                 " Disable automatic line wrapping
 
 " -----------------------------------------------------
 " Colourscheme
@@ -97,7 +101,7 @@ set statusline+=%3p%%\ \                                   " Percentage through 
 let g:netrw_banner=0                                       " Remove useless banner
 let g:netrw_liststyle=3                                    " Show tree view
 let g:netrw_winsize=-35                                    " Set width of explorer to 35 columns
-"let g:netrw_browse_split=4                                 " Open the selected file in the previous window
+let g:netrw_browse_split=4                                 " Open the selected file in the previous window
 let g:netrw_altv=1
 autocmd FileType netrw setlocal bufhidden=delete           " Fix the tendency for NETRW to leave unmodified buffers open
 
@@ -114,6 +118,13 @@ let mapleader="\<Space>"
 inoremap hh <esc>
 xnoremap hh <esc>
 cnoremap hh <C-c>
+
+" Deal with the system clipboard
+nnoremap <leader>y "+y
+vnoremap <leader>y "+y
+nnoremap <leader>p "+p
+vnoremap <leader>p "+p
+nnoremap <leader>P "+P
 
 " Toggle between absolute line numbers and hybrid line numbers
 nnoremap <silent> <leader>l :LineNumberToggle<cr>
