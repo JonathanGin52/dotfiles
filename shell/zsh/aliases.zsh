@@ -1,6 +1,6 @@
 # Tmux aliases
 alias ta='tmux attach -t'
-alias ts='tmux new-session -s'
+alias tn='tmux new-session -s'
 alias tls='tmux list-sessions'
 alias tksv='tmux kill-server'
 alias tkss='tmux kill-session -t'
