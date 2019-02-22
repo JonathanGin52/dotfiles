@@ -14,8 +14,6 @@
 	version = 2
 [credential]
 	helper = osxkeychain
-[protocol "galaxy"]
-	allow = always
 [url "https://github.com/Shopify/"]
 	pushInsteadOf = https://github.com/Shopify/
 [url "git@github.com:Shopify/"]

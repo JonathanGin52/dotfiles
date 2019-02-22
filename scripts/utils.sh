@@ -1,4 +1,6 @@
 #!/bin/bash
+# Author: @alrra
+# https://github.com/alrra/dotfiles
 
 answer_is_yes() {
     [[ "$REPLY" =~ ^[Yy]$ ]] \
@@ -12,21 +14,28 @@ ask() {
 }
 
 ask_for_confirmation() {
-    print_question "$1 (y/n) "
+    print_question "$1 (y/N) "
     read -r -n 1
     printf "\n"
 }
 
 ask_for_sudo() {
+
     # Ask for the administrator password upfront.
 
     sudo -v &> /dev/null
+
+    # Update existing `sudo` time stamp
+    # until this script has finished.
+    #
+    # https://gist.github.com/cowboy/3118588
 
     while true; do
         sudo -n true
         sleep 60
         kill -0 "$$" || exit
     done &> /dev/null &
+
 }
 
 cmd_exists() {
@@ -232,12 +241,15 @@ print_question() {
 }
 
 print_result() {
+
     if [ "$1" -eq 0 ]; then
         print_success "$2"
     else
         print_error "$2"
     fi
+
     return "$1"
+
 }
 
 print_success() {
@@ -256,6 +268,7 @@ set_trap() {
 }
 
 skip_questions() {
+
      while :; do
         case $1 in
             -y|--yes) return 0;;
@@ -265,9 +278,11 @@ skip_questions() {
     done
 
     return 1
+
 }
 
 show_spinner() {
+
     local -r FRAMES='/-\|'
 
     # shellcheck disable=SC2034
@@ -280,87 +295,59 @@ show_spinner() {
     local i=0
     local frameText=""
 
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    # Note: In order for the Travis CI site to display
+    # things correctly, it needs special treatment, hence,
+    # the "is Travis CI?" checks.
+
+    if [ "$TRAVIS" != "true" ]; then
+
+        # Provide more space so that the text hopefully
+        # doesn't reach the bottom line of the terminal window.
+        #
+        # This is a workaround for escape sequences not tracking
+        # the buffer position (accounting for scrolling).
+        #
+        # See also: https://unix.stackexchange.com/a/278888
+
+        printf "\n\n\n"
+        tput cuu 3
+
+        tput sc
+
+    fi
+
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
     # Display spinner while the commands are being executed.
 
     while kill -0 "$PID" &>/dev/null; do
+
         frameText="   [${FRAMES:i++%NUMBER_OR_FRAMES:1}] $MSG"
-        sleep 0.2
-    done
-}
 
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-create_symlinks() {
+        # Print frame text.
 
-    declare -a FILES_TO_SYMLINK=(
-
-        "shell/curlrc"
-        "shell/zshrc"
-
-        "git/gitconfig"
-        "git/gitignore_global"
-
-        "vim"
-
-    )
-
-    local i=""
-    local sourceFile=""
-    local targetFile=""
-    local local="local"
-    local skipQuestions=false
-
-    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-    skip_questions "$@" \
-        && skipQuestions=true
-
-    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-    for i in "${FILES_TO_SYMLINK[@]}"; do
-
-        sourceFile="$(pwd)/$i"
-        targetFile="$HOME/.$(printf "%s" "$i" | sed "s/.*\/\(.*\)/\1/g")"
-
-        if [ ! -e "$targetFile" ] || $skipQuestions; then
-
-            execute \
-                "ln -fs $sourceFile $targetFile" \
-                "$targetFile → $sourceFile"
-
-        elif [ "$(readlink "$targetFile")" == "$sourceFile" ]; then
-            print_success "$targetFile → $sourceFile"
+        if [ "$TRAVIS" != "true" ]; then
+            printf "%s\n" "$frameText"
         else
+            printf "%s" "$frameText"
+        fi
 
-            if ! $skipQuestions; then
+        sleep 0.2
 
-                ask_for_confirmation "'$targetFile' already exists, do you want to rename it it $targetFile$local?"
-                if answer_is_yes; then
+        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-                    mv "$targetFile" "$targetFile$local"
-                   # rm -rf "$targetFile"
+        # Clear frame text.
 
-                    execute \
-                        "ln -fs $sourceFile $targetFile" \
-                        "$targetFile → $sourceFile"
-
-                else
-                    print_error "$targetFile → $sourceFile"
-                fi
-
-            fi
-
+        if [ "$TRAVIS" != "true" ]; then
+            tput rc
+        else
+            printf "\r"
         fi
 
     done
+
 }
-
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-main() {
-    print_in_purple "\n • Create symbolic links\n\n"
-    create_symlinks "$@"
-}
-
-main "$@"
-
