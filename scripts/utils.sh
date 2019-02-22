@@ -14,7 +14,7 @@ ask() {
 }
 
 ask_for_confirmation() {
-    print_question "$1 (y/n) "
+    print_question "$1 (y/N) "
     read -r -n 1
     printf "\n"
 }

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Source utils file
-source './utils.sh'
+source 'scripts/utils.sh'
 
 create_symlinks() {
 

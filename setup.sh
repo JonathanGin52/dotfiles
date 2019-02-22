@@ -6,6 +6,8 @@ source 'scripts/utils.sh'
 # Get admin privileges upfront
 ask_for_sudo
 
+print_in_purple "Welcome to my dotfiles setup script.\n\n"
+
 # Install xcode cli tools
 if !(type xcode-select >&- && xpath=$( xcode-select --print-path ) && test -d "${xpath}" && test -x "${xpath}"); then
   echo "Install xcode command line tools..."
@@ -58,6 +60,6 @@ if answer_is_yes; then
   sh scripts/vim.sh
   print_success "Finished installing vim plugins."
 else
-  print_error "Vim plugins not installed, to complete setup, run \"$ vim +PlugInstall +qa\""
+  print_warning "Vim plugins not installed, run \"$ vim +PlugInstall +qa\" to complete vim setup."
 fi
 
