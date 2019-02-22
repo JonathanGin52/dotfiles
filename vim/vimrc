@@ -267,6 +267,7 @@ Plug 'kaicataldo/material.vim'
 
 " Other
 Plug 'mattn/emmet-vim', { 'for': 'html' }
+Plug 'mhinz/vim-startify'
 Plug 'w0rp/ale'
 Plug 'JamshedVesuna/vim-markdown-preview'
 Plug 'tpope/vim-fugitive'
@@ -308,6 +309,18 @@ let vim_markdown_preview_toggle=0                          " Use <C-p> to previe
 let vim_markdown_preview_github=1                          " Use GitHub flavoured markdown
 let vim_markdown_preview_temp_file=1
 let vim_markdown_preview_browser='Google Chrome'           " Use Google chrome to open markdown
+
+" Vim Startify
+"let g:startify_custom_header = ''
+let g:startify_bookmarks = [
+\   { "v":"~/.vim/vimrc" },
+\]
+let g:startify_lists = [
+\   { 'type': 'bookmarks', 'header': ['   Bookmarks'] },
+\   { 'type': 'files', 'header': ['   Recent Files'] },
+\   { 'type': 'dir', 'header': ['   Recent Files in '. getcwd()] },
+\]
+let g:startify_files_number=5
 
 " -----------------------------------------------------
 " Overrides
