@@ -1,0 +1,1 @@
+/Users/jonathan/dotfiles/vim/plugged/onedark.vim/colors/onedark.vim
