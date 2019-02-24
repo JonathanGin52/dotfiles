@@ -326,6 +326,6 @@ let g:startify_files_number=5
 " Overrides
 " -----------------------------------------------------
 if filereadable(expand('~/.vimlocal/vimrc'))
-  source '~/.vimlocal/vimrc'
+  source ~/.vimlocal/vimrc
 endif
 
