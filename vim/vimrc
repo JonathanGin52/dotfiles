@@ -10,7 +10,6 @@ set wildignorecase                                         " Ignore case sensiti
 set autoread                                               " Automatically read external changes
 set history=500                                            " Sets how many lines of history vim has to remember
 set scrolloff=5                                            " Enable always showing 5 lines above/below the cursor position
-set sidescrolloff=10                                       " Enable always showing 10 characters to the right of the cursor
 
 " More natural splitting
 set splitbelow                                             " Open new splits below the current active one
@@ -39,7 +38,6 @@ set showcmd                                                " Show the command as
 set showmatch                                              " Highlight matching [{()}]
 set lazyredraw                                             " Don't redraw the screen while exectuting macros
 set noshowmode                                             " Disable showing the mode in the status line
-set nowrap                                                 " Disable automatic line wrapping
 
 " -----------------------------------------------------
 " Colourscheme
