@@ -254,10 +254,11 @@ augroup END
 " => Plugins
 " =====================================================
 call plug#begin('~/.vim/plugged')
-" Syntax
+" Language specific plugins
 Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'mxw/vim-jsx', { 'for': ['jsx', 'javascript.jsx'] }
+Plug 'tpope/vim-rails', { 'for': ['ruby', 'eruby'] }
 
 " Colours
 Plug 'joshdick/onedark.vim'
