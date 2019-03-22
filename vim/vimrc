@@ -299,7 +299,7 @@ let g:ale_fixers={
 " Emmet
 let g:user_emmet_leader_key=','                            " Set emmet leader key
 
-" Vim Hardmode
+" Vim Hardtime
 let g:hardtime_default_on=0                                " Set default off (0) or on (1)
 let g:hardtime_allow_different_key=1                       " Allow key if it's different from previous key. Allows 'jh', but not 'jj'
 
