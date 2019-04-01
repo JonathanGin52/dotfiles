@@ -265,7 +265,7 @@ Plug 'joshdick/onedark.vim'
 Plug 'kaicataldo/material.vim'
 
 " Other
-Plug 'mattn/emmet-vim', { 'for': ['html', 'eruby'] }
+Plug 'mattn/emmet-vim', { 'for': ['html', 'eruby', 'javascript.jsx'] }
 Plug 'mhinz/vim-startify'
 Plug 'w0rp/ale'
 Plug 'JamshedVesuna/vim-markdown-preview'
