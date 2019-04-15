@@ -1,19 +1,19 @@
 [user]
-	name = Jonathan Gin
-	email = jonathangin52@gmail.com
+  name = Jonathan Gin
+  email = jonathangin52@gmail.com
 [core]
-	editor = vim
-	excludesfile = /Users/jonathan/.gitignore_global
+  editor = vim
+  excludesfile = /Users/jonathan/.gitignore_global
 [alias]
-	co = checkout
-	hist = log --graph --pretty='''%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset''' --all
-    cleanup = "!git branch --merged | grep  -v '\\*\\|master\\|develop' | xargs -n 1 git branch -d"
-	ctags = !.git/hooks/ctags
+  co = checkout
+  hist = log --graph --pretty='''%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset''' --all
+  cleanup = "!git branch --merged | rg  -v '\\*\\|master\\|develop' | xargs -n 1 git branch -d"
+  ctags = !.git/hooks/ctags
 [diff]
-	algorithm = patience
+  algorithm = patience
 [protocol]
-	version = 2
+  version = 2
 [credential]
-	helper = osxkeychain
+  helper = osxkeychain
 [init]
-	templatedir = ~/.git_template
+  templatedir = ~/.git_template
