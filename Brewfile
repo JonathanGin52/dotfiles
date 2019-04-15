@@ -6,6 +6,10 @@ tap "homebrew/core"
 brew "python"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
+# Reimplementation of ctags(1)
+brew "ctags"
+# Command-line fuzzy finder written in Go
+brew "fzf"
 # Distributed revision control system
 brew "git"
 # GitHub Markdown previewer
