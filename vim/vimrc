@@ -143,6 +143,9 @@ map <silent> <leader>- :split<cr>
 " Toggle file explorer
 nnoremap <silent> <leader>e :Lex<cr>
 
+" Open fzf file search
+nnoremap <silent> <leader>f :Files<cr>
+
 " -----------------------------------------------------
 " Spell check
 " -----------------------------------------------------
@@ -261,6 +264,10 @@ Plug 'sheerun/vim-polyglot'
 Plug 'joshdick/onedark.vim'
 Plug 'kaicataldo/material.vim'
 
+" Fzf
+Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf.vim'
+
 " Other
 Plug 'mattn/emmet-vim', { 'for': ['html', 'eruby', 'javascript.jsx'] }
 Plug 'mhinz/vim-startify'
@@ -292,6 +299,13 @@ let g:ale_fixers={
 \   'ruby': ['rubocop'],
 \   'javascript': ['eslint'],
 \}
+
+" Fzf
+" Insert mode completion
+imap <c-x><c-k> <plug>(fzf-complete-word)
+imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-x><c-j> <plug>(fzf-complete-file-ag)
+imap <c-x><c-l> <plug>(fzf-complete-line)
 
 " Emmet
 let g:user_emmet_leader_key=','                            " Set emmet leader key
