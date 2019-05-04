@@ -23,3 +23,5 @@ autoload -U promptinit; promptinit
 prompt pure
 PROMPT='%(?.%F{green}.%F{red})❯%f '
 
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
