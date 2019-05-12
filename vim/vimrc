@@ -237,7 +237,7 @@ endfunction
 " Aucommands
 " -----------------------------------------------------
 " Trim trailing whitespace on save
-autocmd BufWritePre *.rb,*.py,*.java,*.js :call <SID>TrimTrailingWhitespaces()
+autocmd BufWritePre *.rb,*.c,*.java,*.js,*.tsx :call <SID>TrimTrailingWhitespaces()
 
 " Automatically enable spellcheck for markdown files
 augroup markdownSpell
@@ -297,7 +297,8 @@ highlight ALEStyleErrorSign   ctermfg=3
 highlight ALEStyleWarningSign ctermfg=3
 let g:ale_fixers={
 \   'ruby': ['rubocop'],
-\   'javascript': ['eslint'],
+\   'javascript': ['eslint', 'prettier'],
+\   'typescript': ['tslint', 'prettier'],
 \}
 
 " Fzf
