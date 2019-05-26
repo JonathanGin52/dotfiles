@@ -133,6 +133,9 @@ nnoremap <silent> <leader>@ :registers<cr>
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
+" Substitute all occurrences of the word under the cursor
+nnoremap <leader>sr :%s/\<<C-r><C-w>\>//g<Left><Left>
+
 " -----------------------------------------------------
 " Window management
 " -----------------------------------------------------
