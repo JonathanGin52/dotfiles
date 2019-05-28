@@ -281,6 +281,9 @@ call plug#end()
 " -----------------------------------------------------
 " Plugin settings
 " -----------------------------------------------------
+"  Polyglot
+let g:polyglot_disabled=['markdown']
+
 " ALE
 let g:ale_sign_error='● '                                  " Use an solid circle symbol for errors in the sign column
 let g:ale_sign_info='‣ '                                   " Use a solid little arrow for 'info' in the sign column
