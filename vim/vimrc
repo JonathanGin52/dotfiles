@@ -329,4 +329,3 @@ let vim_markdown_preview_browser='Google Chrome'           " Use Google chrome t
 if filereadable(expand('~/.vimlocal/vimrc'))
   source ~/.vimlocal/vimrc
 endif
-
