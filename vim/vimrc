@@ -38,6 +38,7 @@ set showcmd                                                " Show the command as
 set showmatch                                              " Highlight matching [{()}]
 set lazyredraw                                             " Don't redraw the screen while exectuting macros
 set noshowmode                                             " Disable showing the mode in the status line
+set cursorline                                             " Highlight the line the cursor is on
 
 " -----------------------------------------------------
 " Colourscheme
@@ -49,11 +50,6 @@ if (has("termguicolors"))
   let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
   let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
 endif
-
-" Onedark config
-let g:onedark_hide_endofbuffer=1                           " Hide end-of-buffer lines (~)
-let g:onedark_terminal_italics=1                           " Italicize comments
-colorscheme onedark
 
 " -----------------------------------------------------
 " Statusline
@@ -264,7 +260,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'sheerun/vim-polyglot'
 
 " Colours
-Plug 'joshdick/onedark.vim'
+Plug 'arcticicestudio/nord-vim'
 
 " Fzf
 Plug '/usr/local/opt/fzf'
@@ -283,6 +279,12 @@ call plug#end()
 " -----------------------------------------------------
 "  Polyglot
 let g:polyglot_disabled=['markdown']
+
+" Nord
+let g:nord_italic = 1
+let g:nord_italic_comments = 1
+let g:nord_cursor_line_number_background = 1
+colorscheme nord
 
 " ALE
 let g:ale_sign_error='● '                                  " Use a solid circle symbol for errors in the sign column
