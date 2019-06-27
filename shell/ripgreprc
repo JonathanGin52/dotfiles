@@ -1,0 +1,12 @@
+# Types
+
+# For css related files
+--type-add
+style:*.{less,scss,css}
+
+# For react files
+--type-add
+react:*.{tsx,ts,jsx,js}
+
+# Use smart case
+--smart-case

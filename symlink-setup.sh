@@ -9,6 +9,7 @@ create_symlinks() {
 
         "shell/tmux.conf"
         "shell/curlrc"
+        "shell/ripgreprc"
         "shell/zshrc"
 
         "git/gitconfig"
