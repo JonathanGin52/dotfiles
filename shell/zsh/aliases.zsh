@@ -14,6 +14,7 @@ alias rgm="rails generate migration"
 
 alias ssh="TERM=xterm-256color ssh"
 alias hgrep='history | rg --color=auto'
+alias weather='curl http://v2.wttr.in'
 alias cleanupds='find . -type f -name "*.DS_Store" -ls -delete'
 alias pipup='pip list --outdated --format=freeze | rg -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U'
 alias pip3up='pip3 list --outdated --format=freeze | rg -v '^\-e' | cut -d = -f 1  | xargs -n1 pip3 install -U'

@@ -110,6 +110,7 @@ let mapleader="\<Space>"
 
 " Use hh to escape
 inoremap hh <esc>
+inoremap hH <esc>
 xnoremap hh <esc>
 cnoremap hh <C-c>
 
@@ -269,9 +270,12 @@ Plug 'junegunn/fzf.vim'
 " Other
 Plug 'mattn/emmet-vim', { 'for': ['html', 'eruby', 'javascript.jsx', 'typescript.jsx'] }
 Plug 'w0rp/ale'
+Plug 'janko/vim-test'
 Plug 'JamshedVesuna/vim-markdown-preview'
 Plug 'tpope/vim-fugitive'
 Plug 'takac/vim-hardtime'
+Plug 'jgdavey/tslime.vim'
+Plug 'benmills/vimux'
 call plug#end()
 
 " -----------------------------------------------------
@@ -304,6 +308,9 @@ let g:ale_fixers={
 \   'javascript': ['eslint', 'prettier'],
 \   'typescript': ['tslint', 'prettier'],
 \}
+
+" Vim-test
+let test#strategy = "vimux"
 
 " Fzf
 " Insert mode completion

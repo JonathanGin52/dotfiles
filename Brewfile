@@ -2,54 +2,71 @@ tap "heroku/brew"
 tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/core"
-# Interpreted, interactive, object-oriented programming language
-brew "python"
-# Clone of cat(1) with syntax highlighting and Git integration
+tap "shopify/shopify"
+brew "autoconf"
+brew "automake"
 brew "bat"
-# Reimplementation of ctags(1)
+brew "libffi"
+brew "python"
+brew "cairo"
 brew "ctags"
-# Command-line fuzzy finder written in Go
 brew "fzf"
-# Distributed revision control system
 brew "git"
-# GitHub Markdown previewer
+brew "gmp"
+brew "graphviz"
 brew "grip"
-# Improved top (interactive process viewer)
 brew "htop"
-# Platform built on V8 to build network applications
+brew "httpie"
+brew "imagemagick"
+brew "jq"
+brew "librdkafka"
+brew "kafkacat"
+brew "postgresql"
+brew "libgda", link: false
+brew "libusb"
+brew "libxml2"
+brew "memcached"
 brew "node"
-# Manage multiple Node.js versions
 brew "nvm"
-# Reattach process (e.g., tmux) to background
-brew "reattach-to-user-namespace"
-# Search tool like grep and The Silver Searcher
-brew "ripgrep"
-# Powerful, clean, object-oriented scripting language
-brew "ruby"
-# Simplified and community-driven man pages
-brew "tldr"
-# Terminal multiplexer
 brew "tmux"
-# Display directories as trees (with optional color/HTML output)
+brew "overmind"
+brew "pkg-config"
+brew "reattach-to-user-namespace"
+brew "redis"
+brew "ripgrep"
+brew "ruby"
+brew "selenium-server-standalone"
+brew "shadowenv"
+brew "shellcheck"
+brew "snappy"
+brew "tldr"
 brew "tree"
-# Vi 'workalike' with many additional features
 brew "vim"
-# JavaScript package manager
+brew "watchman"
 brew "yarn"
-# UNIX shell (command interpreter)
 brew "zsh"
-# Everything you need to get started with Heroku
 brew "heroku/brew/heroku"
+brew "shopify/shopify/libzookeeper"
+brew "shopify/shopify/mysql-client"
+brew "shopify/shopify/shopify-graphicsmagick"
+brew "shopify/shopify/shopify-imagemagick@6", link: true
+brew "shopify/shopify/toxiproxy"
 cask "1password"
 cask "alacritty"
+cask "brave-browser"
 cask "caprine"
+cask "chromedriver"
 cask "docker"
+cask "eclipse-java"
+cask "firefox"
 cask "flux"
-cask "google-chrome"
+cask "google-cloud-sdk"
 cask "intellij-idea-ce"
 cask "java"
+cask "mtmr"
 cask "ngrok"
 cask "postman"
-cask "slack"
+cask "sequel-pro"
 cask "spotify"
 cask "visual-studio-code"
+cask "shopify/shopify/phantomjs"
