@@ -267,15 +267,15 @@ Plug 'arcticicestudio/nord-vim'
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 
+" Git stuff
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
+
 " Other
 Plug 'mattn/emmet-vim', { 'for': ['html', 'eruby', 'javascript.jsx', 'typescript.jsx'] }
 Plug 'w0rp/ale'
-Plug 'janko/vim-test'
 Plug 'JamshedVesuna/vim-markdown-preview'
-Plug 'tpope/vim-fugitive'
 Plug 'takac/vim-hardtime'
-Plug 'jgdavey/tslime.vim'
-Plug 'benmills/vimux'
 call plug#end()
 
 " -----------------------------------------------------
