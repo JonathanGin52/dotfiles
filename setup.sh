@@ -9,7 +9,7 @@ ask_for_sudo
 print_in_purple "Welcome to my dotfiles setup script.\n\n"
 
 # Install xcode cli tools
-if !(type xcode-select >&- && xpath=$( xcode-select --print-path ) && test -d "${xpath}" && test -x "${xpath}"); then
+if ! (type xcode-select >&- && xpath=$( xcode-select --print-path ) && test -d "${xpath}" && test -x "${xpath}"); then
   echo "Install xcode command line tools..."
   xcode-select --install
 fi
@@ -48,7 +48,7 @@ fi
 # Run symlinks
 ask_for_confirmation "Run symlink setup?"
 if answer_is_yes; then
-  sh scripts/symlink-setup.sh
+  sh symlink-setup.sh
   print_success "Completed symlink setup."
 else
   print_error "Symlink setup not completed"
