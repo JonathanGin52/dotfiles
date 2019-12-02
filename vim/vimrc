@@ -309,9 +309,6 @@ let g:ale_fixers={
 \   'typescript': ['tslint', 'prettier'],
 \}
 
-" Vim-test
-let test#strategy = "vimux"
-
 " Fzf
 " Insert mode completion
 imap <c-x><c-k> <plug>(fzf-complete-word)

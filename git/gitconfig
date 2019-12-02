@@ -3,7 +3,7 @@
   email = jonathangin52@gmail.com
 [core]
   editor = vim
-  excludesfile = /Users/jonathan/.gitignore_global
+  excludesfile = /Users/jonathangin/.gitignore_global
 	commitGraph = true
 [alias]
   co = checkout
