@@ -307,6 +307,7 @@ let g:ale_fixers={
 \   'eruby': ['rubocop'],
 \   'javascript': ['eslint', 'prettier'],
 \   'typescript': ['tslint', 'prettier'],
+\   'rust': ['rustfmt'],
 \}
 
 " Fzf
