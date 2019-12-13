@@ -275,7 +275,6 @@ Plug 'tpope/vim-rhubarb'
 Plug 'mattn/emmet-vim', { 'for': ['html', 'eruby', 'javascript.jsx', 'typescript.jsx'] }
 Plug 'w0rp/ale'
 Plug 'JamshedVesuna/vim-markdown-preview'
-Plug 'takac/vim-hardtime'
 call plug#end()
 
 " -----------------------------------------------------
@@ -333,10 +332,6 @@ let g:fzf_colors =
 
 " Emmet
 let g:user_emmet_leader_key=','                            " Set emmet leader key
-
-" Vim Hardtime
-let g:hardtime_default_on=0                                " Set default off (0) or on (1)
-let g:hardtime_allow_different_key=1                       " Allow key if it's different from previous key. Allows 'jh', but not 'jj'
 
 " Vim Markdown preview
 let vim_markdown_preview_toggle=0                          " Use <C-p> to preview
