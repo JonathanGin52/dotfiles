@@ -99,6 +99,21 @@ let g:netrw_browse_split=4                                 " Open the selected f
 let g:netrw_altv=1
 autocmd FileType netrw setlocal bufhidden=delete           " Fix the tendency for NETRW to leave unmodified buffers open
 
+" -----------------------------------------------------
+" Quick fix list
+" -----------------------------------------------------
+set grepprg=rg\ --smart-case\ --vimgrep\ $*
+set grepformat=%f:%l:%c:%m
+
+nnoremap <silent> [q :cprevious<CR>
+nnoremap <silent> ]q :cnext<CR>
+nnoremap <silent> [Q :cfirst<CR>
+nnoremap <silent> ]Q :clast<CR>
+nnoremap <silent> [l :lprevious<CR>
+nnoremap <silent> ]l :lnext<CR>
+nnoremap <silent> [L :lfirst<CR>
+nnoremap <silent> ]L :llast<CR>
+
 " =====================================================
 " => Custom mappings
 " =====================================================
@@ -306,6 +321,7 @@ let g:ale_fixers={
 \   'eruby': ['rubocop'],
 \   'javascript': ['eslint', 'prettier'],
 \   'typescript': ['tslint', 'prettier'],
+\   'typescriptreact': ['tslint', 'prettier'],
 \   'rust': ['rustfmt'],
 \}
 
