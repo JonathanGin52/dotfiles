@@ -289,6 +289,7 @@ Plug 'tpope/vim-rhubarb'
 " Other
 Plug 'mattn/emmet-vim', { 'for': ['html', 'eruby', 'javascript.jsx', 'typescript.jsx'] }
 Plug 'w0rp/ale'
+Plug 'AndrewRadev/splitjoin.vim'
 Plug 'JamshedVesuna/vim-markdown-preview'
 call plug#end()
 
