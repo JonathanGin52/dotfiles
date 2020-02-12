@@ -306,6 +306,11 @@ let g:nord_cursor_line_number_background = 1
 colorscheme nord
 
 " ALE
+" Keyboard shortcuts for ALE
+map <silent> <leader>t :ALEFix<cr>
+map <silent> <leader>td :ALEDetail<cr>
+map <silent> <leader>tf :ALELint<cr>
+
 let g:ale_sign_error='● '                                  " Use a solid circle symbol for errors in the sign column
 let g:ale_sign_info='‣ '                                   " Use a solid little arrow for 'info' in the sign column
 let g:ale_sign_warning='○ '                                " Use a hollow circle symbol for warnings in the sign column
