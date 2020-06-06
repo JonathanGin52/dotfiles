@@ -27,4 +27,6 @@ alias update_all="sudo softwareupdate --install --all \
   && pip3 list --outdated --format=freeze | rg -v '^\-e' | cut -d = -f 1  | xargs -n1 pip3 install -U \
   && npm install -g npm \
   && npm update -g"
+
 alias vim='nvim'
+alias find='fd'
