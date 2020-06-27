@@ -1,5 +1,3 @@
-echo "Welcome back, Jonathan."
-
 # Terminal title
 DISABLE_AUTO_TITLE="true"
 function _set_terminal_title() {
