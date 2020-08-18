@@ -2,21 +2,21 @@
   name = Jonathan Gin
   email = jonathangin52@gmail.com
 [core]
-  editor = vim
+  editor = nvim
   excludesfile = /Users/jonathangin/.gitignore_global
 	commitGraph = true
+	pager = diff-so-fancy | less --tabs=4 -RFX
 [alias]
   co = checkout
   hist = log --graph --pretty='''%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset''' --all
   cleanup = "!git branch --merged | rg  -v '\\*\\|master\\|develop' | xargs -n 1 git branch -d"
   ctags = !.git/hooks/ctags
   pushf = push --force-with-lease
+  dsf = "!git status -s | fzf --no-sort --reverse --preview 'git diff --color=always {+2} | diff-so-fancy' --bind=ctrl-j:preview-down --bind=ctrl-k:preview-up --preview-window=right:60%:wrap"
 [diff]
   algorithm = patience
 [protocol]
   version = 2
-[credential]
-  helper = osxkeychain
 [url "https://github.com/Shopify/"]
 	insteadOf = git@github.com:Shopify/
 	insteadOf = git@github.com:shopify/
@@ -24,3 +24,22 @@
 	insteadOf = ssh://git@github.com/shopify/
 [gc]
 	writeCommitGraph = true
+[color]
+	ui = true
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+[color "diff"]
+	meta = 11
+	frag = magenta bold
+	commit = yellow bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+[diff-so-fancy]
+	markEmptyLines = false
+[credential]
+	helper = 
+	helper = store --file /opt/dev/var/private/git_credential_store
