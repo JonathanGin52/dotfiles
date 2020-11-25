@@ -21,12 +21,18 @@ alias pip3up='pip3 list --outdated --format=freeze | rg -v '^\-e' | cut -d = -f 
 alias update_all="sudo softwareupdate --install --all \
   && brew update \
   && brew upgrade \
-  && brew cask upgrade --greedy \
+  && brew upgrade --cask --greedy \
   && brew cleanup \
-  && rustup update \
   && pip3 list --outdated --format=freeze | rg -v '^\-e' | cut -d = -f 1  | xargs -n1 pip3 install -U \
   && npm install -g npm \
-  && npm update -g"
+  && npm update -g \
+  && rustup update"
 
 alias vim='nvim'
 alias find='fd'
+
+function notify {
+  title=${1:-"🎉  Finished! 🎉 "}
+  msg=${2:-"Your command is finished!"}
+  osascript -e "display notification \"$msg\" with title \"$title\" sound name \"Default\""
+}
