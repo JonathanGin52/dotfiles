@@ -1,6 +1,5 @@
 #!/bin/bash
 
-brew info vim | grep --quiet 'Not installed' && brew install vim
+brew info nvim | grep --quiet 'Not installed' && brew install nvim
 
-vim +PlugInstall +PlugClean! +qa
-
+nvim -es -u init.vim -i NONE -c "PlugInstall" -c "qa"
