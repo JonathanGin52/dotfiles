@@ -1,6 +1,44 @@
-set runtimepath^=~/.vim runtimepath+=~/.vim/after
-let &packpath = &runtimepath
-source ~/.vim/vimrc
+" =====================================================
+" => General
+" =====================================================
+set nocompatible                                           " Use vim, not vi
+syntax on                                                  " Enable syntax highlighting
+filetype on                                                " Enable filetype detection
+filetype indent on                                         " Enable filetype-specific indenting
+filetype plugin on                                         " Enable filetype-specific plugins
+set wildignorecase                                         " Ignore case sensitivity in wildmenu (like tab-completing :commands)
+set autoread                                               " Automatically read external changes
+set history=500                                            " Sets how many lines of history vim has to remember
+set scrolloff=5                                            " Enable always showing 5 lines above/below the cursor position
+
+" More natural splitting
+set splitbelow                                             " Open new splits below the current active one
+set splitright                                             " Open new splits to the right of the current active one
+
+" Searching
+set ignorecase                                             " Ignore case in search
+set smartcase                                              " But case-sensitive if expression contains a capital letter
+set incsearch                                              " Show matches while typing
+
+" -----------------------------------------------------
+" Tabs and spaces
+" -----------------------------------------------------
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
+set expandtab                                              " Turns tabs into spaces
+autocmd FileType java setlocal ts=4 sts=4 sw=4
+autocmd FileType c setlocal ts=4 sts=4 sw=4
+
+" =====================================================
+" => UI
+" =====================================================
+set number                                                 " Show line numbers
+set showcmd                                                " Show the command as it's typed
+set showmatch                                              " Highlight matching [{()}]
+set lazyredraw                                             " Don't redraw the screen while exectuting macros
+set noshowmode                                             " Disable showing the mode in the status line
+set cursorline                                             " Highlight the line the cursor is on
 
 nnoremap <silent> <leader>f :call Fzf_dev()<CR>
 let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
@@ -69,3 +107,335 @@ function! CreateCenteredFloatingWindow()
   au BufWipeout <buffer> exe 'bw '.s:buf
 endfunction
 let g:fzf_layout = { 'window': 'call CreateCenteredFloatingWindow()' }
+
+
+
+
+" -----------------------------------------------------
+" Colourscheme
+" -----------------------------------------------------
+set background=dark                                        " Dark mode is always better
+if (has("termguicolors"))
+  set termguicolors
+  " Vim-specific sequences for RGB colours
+  let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
+endif
+
+" -----------------------------------------------------
+" Statusline
+" -----------------------------------------------------
+let g:currentmode={
+  \ 'n'  : 'N ',
+  \ 'no' : 'N·Operator Pending ',
+  \ 'v'  : 'V ',
+  \ 'V'  : 'V·Line ',
+  \ "\<C-v>" : 'V·Block ',
+  \ 's'  : 'Select ',
+  \ 'S'  : 'S·Line ',
+  \ "\<C-s>"  : 'S·Block ',
+  \ 'i'  : 'I ',
+  \ 'R'  : 'R ',
+  \ 'Rv' : 'V·Replace ',
+  \ 'c'  : 'Command ',
+  \ 'cv' : 'Vim Ex ',
+  \ 'ce' : 'Ex ',
+  \ 'r'  : 'Prompt ',
+  \ 'rm' : 'More ',
+  \ 'r?' : 'Confirm ',
+  \ '!'  : 'Shell ',
+  \ 't'  : 'Terminal '
+\}
+
+set laststatus=2                                           " Show statusline
+set statusline=%*\ %{toupper(g:currentmode[mode()])}       " Current mode
+"set statusline+=%8*\ [%n]                                 " Buffer number
+set statusline+=%*\ %{GitInfo()}                           " Git Branch name
+set statusline+=%*\ %<%f                                   " File path
+set statusline+=%{&readonly?'\ \ ':'\ \ '}                " Read-only flag
+set statusline+=%{&modified?'\ ✎':''}                      " Modified flag
+set statusline+=%=                                         " Split between left and right side items
+set statusline+=%*\ %y                                     " FileType
+"set statusline+=%7*\ %{(&fenc!=''?&fenc:&enc)}\[%{&ff}]\  " Encoding & Fileformat
+set statusline+=%4l,%-4v                                   " Row of cursor, column of curson
+set statusline+=%3p%%\ \                                   " Percentage through the file
+
+" -----------------------------------------------------
+" NETRW
+" -----------------------------------------------------
+let g:netrw_banner=0                                       " Remove useless banner
+let g:netrw_liststyle=3                                    " Show tree view
+let g:netrw_winsize=-35                                    " Set width of explorer to 35 columns
+let g:netrw_browse_split=4                                 " Open the selected file in the previous window
+let g:netrw_altv=1
+autocmd FileType netrw setlocal bufhidden=delete           " Fix the tendency for NETRW to leave unmodified buffers open
+
+" -----------------------------------------------------
+" Quick fix list
+" -----------------------------------------------------
+set grepprg=rg\ --smart-case\ --vimgrep\ $*
+set grepformat=%f:%l:%c:%m
+
+nnoremap <silent> [q :cprevious<CR>
+nnoremap <silent> ]q :cnext<CR>
+nnoremap <silent> [Q :cfirst<CR>
+nnoremap <silent> ]Q :clast<CR>
+nnoremap <silent> [l :lprevious<CR>
+nnoremap <silent> ]l :lnext<CR>
+nnoremap <silent> [L :lfirst<CR>
+nnoremap <silent> ]L :llast<CR>
+
+" =====================================================
+" => Custom mappings
+" =====================================================
+" -----------------------------------------------------
+" Keymaps
+" -----------------------------------------------------
+" Set leader key to <space>
+let mapleader="\<Space>"
+
+" Use hh to escape
+inoremap hh <esc>
+inoremap hH <esc>
+xnoremap hh <esc>
+cnoremap hh <C-c>
+
+" Deal with the system clipboard
+nnoremap <leader>y "+y
+vnoremap <leader>y "+y
+nnoremap <leader>p "+p
+vnoremap <leader>p "+p
+nnoremap <leader>P "+P
+
+" Toggle between absolute line numbers and hybrid line numbers
+nnoremap <silent> <leader>l :LineNumberToggle<cr>
+
+" Display the content of registers
+nnoremap <silent> <leader>@ :registers<cr>
+
+" Switch CWD to the directory of the open buffer
+map <leader>cd :cd %:p:h<cr>:pwd<cr>
+
+" Substitute all occurrences of the word under the cursor
+nnoremap <leader>sr :%s/\<<C-r><C-w>\>//g<Left><Left>
+
+" -----------------------------------------------------
+" Window management
+" -----------------------------------------------------
+" Create splits with <leader>[-|], they look like the split they create
+map <silent> <leader>\| :vsplit<cr>
+map <silent> <leader>- :split<cr>
+
+" Toggle file explorer
+nnoremap <silent> <leader>e :Lex<cr>
+
+" Open fzf file search
+nnoremap <silent> <leader>f :Files<cr>
+
+" -----------------------------------------------------
+" Spell check
+" -----------------------------------------------------
+" Pressing <leader>ss will toggle and untoggle spell checking
+map <silent> <leader>ss :setlocal spell!<cr>
+
+" Next misspelled word
+map <leader>sn ]s
+
+" Previous misspelled word
+map <leader>sp [s
+
+" Add to dictionary
+map <leader>sa zg
+
+" Suggestions
+map <leader>s? z=
+
+" Switch windows
+nmap <leader>w <C-w>w
+
+" -----------------------------------------------------
+" Git shortcuts
+" -----------------------------------------------------
+nmap <leader>gs :Gstatus<cr>gg<c-n>
+nnoremap <leader>gd :Gdiff<cr>
+
+" -----------------------------------------------------
+" Command maps
+" -----------------------------------------------------
+" Toggle between absolute linenumbers and hybrid line numbers
+command! LineNumberToggle call s:LineNumberToggle()
+
+" Switch CWD to root of git repository
+command! Root call s:root()
+
+" Make these commonly mistyped commands still work
+command! W w
+command! Wq wq
+command! Wqa wqa
+command! Q q
+command! Qa qa
+
+" =====================================================
+" => Stuff that does other stuff
+" =====================================================
+" -----------------------------------------------------
+" Functions
+" -----------------------------------------------------
+" Trim trailing whitespace
+function! <SID>TrimTrailingWhitespaces()
+    let l=line(".")
+    let c=col(".")
+    %s/\s\+$//e
+    call cursor(l, c)
+endfun
+
+" Toggle between relative and absolute numbers
+function! s:LineNumberToggle() abort
+  if (&relativenumber==1)
+    set norelativenumber
+  else
+    set relativenumber
+  endif
+endfunction
+
+" Get git information
+function! GitInfo()
+  let git=fugitive#head()
+  if git != ''
+    return ' '.fugitive#head()
+  else
+    return ''
+  endif
+endfunction
+
+" Find and switch to root of git repository
+function! s:root()
+  let root=systemlist('git rev-parse --show-toplevel')[0]
+  if v:shell_error
+    echo 'Not in git repo'
+  else
+    execute 'lcd' root
+    echo 'Changed directory to: '.root
+  endif
+endfunction
+
+" -----------------------------------------------------
+" Aucommands
+" -----------------------------------------------------
+" Trim trailing whitespace on save
+autocmd BufWritePre *.rb,*.c,*.java,*.js,*.tsx :call <SID>TrimTrailingWhitespaces()
+
+" Automatically enable spellcheck for markdown files
+augroup markdownSpell
+    autocmd!
+    autocmd FileType markdown setlocal spell
+    autocmd BufRead,BufNewFile *.md setlocal spell
+augroup END
+
+" Uncomment below to automatically open explorer when opening a file
+" augroup ProjectDrawer
+"   autocmd!
+"   autocmd VimEnter * :Lexplore
+"   autocmd VimEnter * :wincmd p
+" augroup END
+
+" =====================================================
+" => Plugins
+" =====================================================
+
+call plug#begin('~/.vim/plugged')
+" Language specific plugins
+Plug 'sheerun/vim-polyglot'
+
+" Colours
+Plug 'arcticicestudio/nord-vim'
+
+" Fzf
+Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf.vim'
+
+" Git stuff
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
+
+" Other
+Plug 'mattn/emmet-vim', { 'for': ['html', 'eruby', 'javascript.jsx', 'typescript.jsx'] }
+Plug 'w0rp/ale'
+Plug 'AndrewRadev/splitjoin.vim'
+Plug 'JamshedVesuna/vim-markdown-preview'
+call plug#end()
+
+" -----------------------------------------------------
+" Plugin settings
+" -----------------------------------------------------
+"  Polyglot
+let g:polyglot_disabled=['markdown']
+
+" Nord
+let g:nord_italic = 1
+let g:nord_italic_comments = 1
+let g:nord_cursor_line_number_background = 1
+colorscheme nord
+
+" ALE
+" Keyboard shortcuts for ALE
+map <silent> <leader>t :ALEFix<cr>
+map <silent> <leader>td :ALEDetail<cr>
+map <silent> <leader>tf :ALELint<cr>
+
+let g:ale_sign_error='● '                                  " Use a solid circle symbol for errors in the sign column
+let g:ale_sign_info='‣ '                                   " Use a solid little arrow for 'info' in the sign column
+let g:ale_sign_warning='○ '                                " Use a hollow circle symbol for warnings in the sign column
+let g:ale_sign_column_always=1                             " Show the sign column even if there are no linter notes
+
+" It may be nice to highlight the actual error here too - drop the 'sign' part
+highlight ALEErrorSign        ctermfg=1
+highlight ALEWarningSign      ctermfg=3
+highlight ALEInfoSign         ctermfg=4
+highlight ALEStyleErrorSign   ctermfg=3
+highlight ALEStyleWarningSign ctermfg=3
+let g:ale_fixers={
+\   'ruby': ['rubocop'],
+\   'eruby': ['rubocop'],
+\   'javascript': ['eslint', 'prettier'],
+\   'typescript': ['tslint', 'prettier'],
+\   'typescriptreact': ['tslint', 'prettier'],
+\   'rust': ['rustfmt'],
+\}
+
+" Fzf
+" Insert mode completion
+imap <c-x><c-k> <plug>(fzf-complete-word)
+imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-x><c-j> <plug>(fzf-complete-file-ag)
+imap <c-x><c-l> <plug>(fzf-complete-line)
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Normal'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Normal'] }
+
+" Emmet
+let g:user_emmet_leader_key=','                            " Set emmet leader key
+
+" Vim Markdown preview
+let vim_markdown_preview_toggle=0                          " Use <C-p> to preview
+let vim_markdown_preview_github=1                          " Use GitHub flavoured markdown
+let vim_markdown_preview_temp_file=1                       " Automatically remove the rendered HTML file after opening
+let vim_markdown_preview_browser='Google Chrome'           " Use Google chrome to open markdown
+
+" -----------------------------------------------------
+" Overrides
+" -----------------------------------------------------
+if filereadable(expand('~/.vimlocal/vimrc'))
+  source ~/.vimlocal/vimrc
+endif
