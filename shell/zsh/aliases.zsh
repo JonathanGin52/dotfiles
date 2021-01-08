@@ -9,7 +9,7 @@ alias tkss='tmux kill-session -t'
 alias rdm="rake db:migrate"
 alias rdms="rake db:migrate:status"
 alias rdr="rake db:rollback"
-alias rrg="rake routes | grep"
+alias rrg="rails routes | rg"
 alias rgm="rails generate migration"
 
 alias ssh="TERM=xterm-256color ssh"
