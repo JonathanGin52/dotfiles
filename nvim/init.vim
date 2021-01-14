@@ -358,6 +358,10 @@ Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 
+" Quick fix list improvements
+Plug 'MattesGroeger/vim-bookmarks'
+Plug 'stefandtw/quickfix-reflector.vim'
+
 " Other
 Plug 'mattn/emmet-vim', { 'for': ['html', 'eruby', 'javascript.jsx', 'typescript.jsx'] }
 Plug 'w0rp/ale'
