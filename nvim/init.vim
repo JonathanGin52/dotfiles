@@ -41,7 +41,6 @@ set noshowmode                                             " Disable showing the
 set cursorline                                             " Highlight the line the cursor is on
 
 nnoremap <silent> <leader>f :call Fzf_dev()<CR>
-let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
 command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
 
 function! Fzf_dev()
@@ -173,7 +172,7 @@ autocmd FileType netrw setlocal bufhidden=delete           " Fix the tendency fo
 " -----------------------------------------------------
 " Quick fix list
 " -----------------------------------------------------
-set grepprg=rg\ --smart-case\ --vimgrep\ $*
+set grepprg=rg\ --smart-case\ --glob\ '!*.rbi'\ --vimgrep\ $*
 set grepformat=%f:%l:%c:%m
 
 nnoremap <silent> [q :cprevious<CR>

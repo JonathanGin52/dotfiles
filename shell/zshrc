@@ -18,6 +18,9 @@ source $CURRENT_DIRECTORY/zsh/startup.zsh
 # Plugins
 source $CURRENT_DIRECTORY/zsh/plugins.zsh
 
+export FZF_DEFAULT_COMMAND="fd --type f -E '*.rbi'"
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
 # Theme
 ZSH_THEME="powerlevel10k/powerlevel10k"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
