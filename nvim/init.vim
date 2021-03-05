@@ -154,6 +154,7 @@ set statusline+=%*\ %<%f                                   " File path
 set statusline+=%{&readonly?'\ \ ':'\ \ '}                " Read-only flag
 set statusline+=%{&modified?'\ ✎':''}                      " Modified flag
 set statusline+=%=                                         " Split between left and right side items
+set statusline+=%{gutentags#statusline()}\                 " ctags generation progress
 set statusline+=%*\ %y                                     " FileType
 "set statusline+=%7*\ %{(&fenc!=''?&fenc:&enc)}\[%{&ff}]\  " Encoding & Fileformat
 set statusline+=%4l,%-4v                                   " Row of cursor, column of curson
@@ -362,7 +363,7 @@ Plug 'MattesGroeger/vim-bookmarks'
 Plug 'stefandtw/quickfix-reflector.vim'
 
 " Other
-Plug 'mattn/emmet-vim', { 'for': ['html', 'eruby', 'javascript.jsx', 'typescript.jsx'] }
+Plug 'ludovicchabant/vim-gutentags'
 Plug 'w0rp/ale'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'JamshedVesuna/vim-markdown-preview'

@@ -29,7 +29,7 @@ alias update_all="sudo softwareupdate --install --all \
   && rustup update"
 
 alias vim='nvim'
-alias find='fd'
+alias ctags="`brew --prefix`/bin/ctags"
 
 function notify {
   title=${1:-"🎉  Finished! 🎉 "}
