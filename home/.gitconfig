@@ -9,7 +9,7 @@
 [alias]
   co = checkout
   hist = log --graph --pretty='''%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset''' --all
-  cleanup = "!git branch --merged | rg  -v '\\*\\|master\\|develop' | xargs -n 1 git branch -d"
+  cleanup = "!git branch --merged | rg  -v '\\*\\|master\\|main' | xargs -n 1 git branch -d"
   ctags = !.git/hooks/ctags
   pushf = push --force-with-lease
   dsf = "!git status -s | fzf --no-sort --reverse --preview 'git diff --color=always {+2} | diff-so-fancy' --bind=ctrl-j:preview-down --bind=ctrl-k:preview-up --preview-window=right:60%:wrap"
@@ -43,3 +43,5 @@
 [credential]
 	helper = 
 	helper = store --file /opt/dev/var/private/git_credential_store
+[pull]
+	ff = only

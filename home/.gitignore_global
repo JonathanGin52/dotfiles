@@ -86,3 +86,5 @@ tags.temp
 [._]*.un~
 
 node_modules
+
+README.md
