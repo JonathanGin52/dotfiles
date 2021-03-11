@@ -41,7 +41,6 @@ set noshowmode                                             " Disable showing the
 set cursorline                                             " Highlight the line the cursor is on
 
 nnoremap <silent> <leader>f :call Fzf_dev()<CR>
-command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
 
 function! Fzf_dev()
   let l:fzf_files_options = '--preview "bat --theme="base16" --style=numbers,changes --color=always {1..-1} | head -'.&lines.'"'
@@ -200,6 +199,9 @@ inoremap hH <esc>
 xnoremap hh <esc>
 cnoremap hh <C-c>
 
+xnoremap . :norm.<CR>
+xnoremap @@ :norm! @@<CR>
+
 " Deal with the system clipboard
 nnoremap <leader>y "+y
 vnoremap <leader>y "+y
@@ -218,6 +220,10 @@ map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
 " Substitute all occurrences of the word under the cursor
 nnoremap <leader>sr :%s/\<<C-r><C-w>\>//g<Left><Left>
+
+nnoremap <leader>rg :Rg <c-r><c-w><cr>
+
+nnoremap <silent> <leader><leader> :nohl<cr>
 
 " -----------------------------------------------------
 " Window management
@@ -346,6 +352,7 @@ augroup END
 call plug#begin('~/.vim/plugged')
 " Language specific plugins
 Plug 'sheerun/vim-polyglot'
+Plug 'adelarsq/vim-matchit'
 
 " Colours
 Plug 'arcticicestudio/nord-vim'
@@ -361,6 +368,11 @@ Plug 'tpope/vim-rhubarb'
 " Quick fix list improvements
 Plug 'MattesGroeger/vim-bookmarks'
 Plug 'stefandtw/quickfix-reflector.vim'
+Plug 'yssl/QFEnter'
+
+" Text objects
+Plug 'kana/vim-textobj-user'
+Plug 'nelstrom/vim-textobj-rubyblock'
 
 " Other
 Plug 'ludovicchabant/vim-gutentags'
@@ -373,12 +385,13 @@ call plug#end()
 " Plugin settings
 " -----------------------------------------------------
 "  Polyglot
-let g:polyglot_disabled=['markdown']
+" let g:polyglot_disabled=['markdown']
 
 " Nord
 let g:nord_italic = 1
 let g:nord_italic_comments = 1
 let g:nord_cursor_line_number_background = 1
+let g:nord_uniform_diff_background = 1
 colorscheme nord
 
 " ALE
