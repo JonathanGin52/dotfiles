@@ -10,6 +10,14 @@ set wildignorecase                                         " Ignore case sensiti
 set autoread                                               " Automatically read external changes
 set history=500                                            " Sets how many lines of history vim has to remember
 set scrolloff=5                                            " Enable always showing 5 lines above/below the cursor position
+set undofile
+
+" -----------------------------------------------------
+" Enable mouse
+" -----------------------------------------------------
+set mouse=n
+" noremap <LeftDrag> <LeftMouse>
+" noremap! <LeftDrag> <LeftMouse>
 
 " More natural splitting
 set splitbelow                                             " Open new splits below the current active one
@@ -27,97 +35,20 @@ set tabstop=2
 set softtabstop=2
 set shiftwidth=2
 set expandtab                                              " Turns tabs into spaces
-autocmd FileType java setlocal ts=4 sts=4 sw=4
-autocmd FileType c setlocal ts=4 sts=4 sw=4
 
 " =====================================================
 " => UI
 " =====================================================
 set number                                                 " Show line numbers
 set showcmd                                                " Show the command as it's typed
-set showmatch                                              " Highlight matching [{()}]
 set lazyredraw                                             " Don't redraw the screen while exectuting macros
-set noshowmode                                             " Disable showing the mode in the status line
 set cursorline                                             " Highlight the line the cursor is on
-
-nnoremap <silent> <leader>f :call Fzf_dev()<CR>
-
-function! Fzf_dev()
-  let l:fzf_files_options = '--preview "bat --theme="base16" --style=numbers,changes --color=always {1..-1} | head -'.&lines.'"'
-
-  function! s:files()
-    let l:files = split(system($FZF_DEFAULT_COMMAND), '\n')
-    return s:format_file_list(l:files)
-  endfunction
-
-  function! s:format_file_list(candidates)
-    let l:result = []
-    for l:candidate in a:candidates
-      let l:filename = fnamemodify(l:candidate, ':p:t')
-      call add(l:result, printf('%s', l:candidate))
-    endfor
-    return l:result
-  endfunction
-
-  function! s:edit_file(lines)
-    if len(a:lines) < 2 | return | endif
-
-    let l:cmd = get({
-          \ 'ctrl-x': 'split',
-          \ 'ctrl-v': 'vertical split',
-          \ 'ctrl-t': 'tabe'
-          \ }, a:lines[0], 'e')
-
-    for l:item in a:lines[1:]
-      let l:pos = strridx(l:item, ' ')
-      let l:file_path = l:item[pos+1:-1]
-      execute 'silent ' . l:cmd . ' ' . l:file_path
-    endfor
-  endfunction
-
-  call fzf#run({
-        \ 'source': <sid>files(),
-        \ 'sink*':   function('s:edit_file'),
-        \ 'options': '-m --preview-window=noborder ' . l:fzf_files_options . ' --expect=ctrl-v,ctrl-x,ctrl-t --multi --bind=ctrl-a:select-all,ctrl-d:deselect-all',
-        \ 'window': 'call CreateCenteredFloatingWindow()',
-        \ 'down':    '40%' })
-endfunction
-
-function! CreateCenteredFloatingWindow()
-  let width = min([&columns - 4, max([80, &columns - 20])])
-  let height = min([&lines - 4, max([20, &lines - 10])])
-  let top = ((&lines - height) / 2) - 1
-  let left = (&columns - width) / 2
-  let opts = {'relative': 'editor', 'row': top, 'col': left, 'width': width, 'height': height, 'style': 'minimal'}
-  let top = "╭" . repeat("─", width - 2) . "╮"
-  let mid = "│" . repeat(" ", width - 2) . "│"
-  let bot = "╰" . repeat("─", width - 2) . "╯"
-  let lines = [top] + repeat([mid], height - 2) + [bot]
-  let s:buf = nvim_create_buf(v:false, v:true)
-  call nvim_buf_set_lines(s:buf, 0, -1, v:true, lines)
-  call nvim_open_win(s:buf, v:true, opts)
-  set winhl=Normal:Floating
-  let opts.row += 1
-  let opts.height -= 2
-  let opts.col += 2
-  let opts.width -= 4
-  call nvim_open_win(nvim_create_buf(v:false, v:true), v:true, opts)
-  au BufWipeout <buffer> exe 'bw '.s:buf
-endfunction
-let g:fzf_layout = { 'window': 'call CreateCenteredFloatingWindow()' }
-
-
-
 
 " -----------------------------------------------------
 " Colourscheme
 " -----------------------------------------------------
-set background=dark                                        " Dark mode is always better
 if (has("termguicolors"))
   set termguicolors
-  " Vim-specific sequences for RGB colours
-  let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
-  let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
 endif
 
 " -----------------------------------------------------
@@ -158,16 +89,6 @@ set statusline+=%*\ %y                                     " FileType
 "set statusline+=%7*\ %{(&fenc!=''?&fenc:&enc)}\[%{&ff}]\  " Encoding & Fileformat
 set statusline+=%4l,%-4v                                   " Row of cursor, column of curson
 set statusline+=%3p%%\ \                                   " Percentage through the file
-
-" -----------------------------------------------------
-" NETRW
-" -----------------------------------------------------
-let g:netrw_banner=0                                       " Remove useless banner
-let g:netrw_liststyle=3                                    " Show tree view
-let g:netrw_winsize=-35                                    " Set width of explorer to 35 columns
-let g:netrw_browse_split=4                                 " Open the selected file in the previous window
-let g:netrw_altv=1
-autocmd FileType netrw setlocal bufhidden=delete           " Fix the tendency for NETRW to leave unmodified buffers open
 
 " -----------------------------------------------------
 " Quick fix list
@@ -215,9 +136,6 @@ nnoremap <silent> <leader>l :LineNumberToggle<cr>
 " Display the content of registers
 nnoremap <silent> <leader>@ :registers<cr>
 
-" Switch CWD to the directory of the open buffer
-map <leader>cd :cd %:p:h<cr>:pwd<cr>
-
 " Substitute all occurrences of the word under the cursor
 nnoremap <leader>sr :%s/\<<C-r><C-w>\>//g<Left><Left>
 
@@ -232,11 +150,9 @@ nnoremap <silent> <leader><leader> :nohl<cr>
 map <silent> <leader>\| :vsplit<cr>
 map <silent> <leader>- :split<cr>
 
-" Toggle file explorer
-nnoremap <silent> <leader>e :Lex<cr>
-
-" Open fzf file search
+" FZF shortcuts
 nnoremap <silent> <leader>f :Files<cr>
+nnoremap <silent> <leader>b :Buffers<cr>
 
 " -----------------------------------------------------
 " Spell check
@@ -250,19 +166,22 @@ map <leader>sn ]s
 " Previous misspelled word
 map <leader>sp [s
 
-" Add to dictionary
-map <leader>sa zg
-
 " Suggestions
 map <leader>s? z=
 
+" -----------------------------------------------------
+" Window management
+" -----------------------------------------------------
 " Switch windows
 nmap <leader>w <C-w>w
+
+" Resize windows
+nmap <leader>= <C-w>=
 
 " -----------------------------------------------------
 " Git shortcuts
 " -----------------------------------------------------
-nmap <leader>gs :Gstatus<cr>gg<c-n>
+nmap <leader>gs :Git<cr>gg<c-n>
 nnoremap <leader>gd :Gdiff<cr>
 
 " -----------------------------------------------------
@@ -270,9 +189,6 @@ nnoremap <leader>gd :Gdiff<cr>
 " -----------------------------------------------------
 " Toggle between absolute linenumbers and hybrid line numbers
 command! LineNumberToggle call s:LineNumberToggle()
-
-" Switch CWD to root of git repository
-command! Root call s:root()
 
 " Make these commonly mistyped commands still work
 command! W w
@@ -314,17 +230,6 @@ function! GitInfo()
   endif
 endfunction
 
-" Find and switch to root of git repository
-function! s:root()
-  let root=systemlist('git rev-parse --show-toplevel')[0]
-  if v:shell_error
-    echo 'Not in git repo'
-  else
-    execute 'lcd' root
-    echo 'Changed directory to: '.root
-  endif
-endfunction
-
 " -----------------------------------------------------
 " Aucommands
 " -----------------------------------------------------
@@ -333,66 +238,59 @@ autocmd BufWritePre *.rb,*.c,*.java,*.js,*.tsx :call <SID>TrimTrailingWhitespace
 
 " Automatically enable spellcheck for markdown files
 augroup markdownSpell
-    autocmd!
-    autocmd FileType markdown setlocal spell
-    autocmd BufRead,BufNewFile *.md setlocal spell
+  autocmd!
+  autocmd FileType markdown setlocal spell
+  autocmd BufRead,BufNewFile *.md setlocal spell
 augroup END
-
-" Uncomment below to automatically open explorer when opening a file
-" augroup ProjectDrawer
-"   autocmd!
-"   autocmd VimEnter * :Lexplore
-"   autocmd VimEnter * :wincmd p
-" augroup END
 
 " =====================================================
 " => Plugins
 " =====================================================
-
 call plug#begin('~/.vim/plugged')
-" Language specific plugins
-Plug 'sheerun/vim-polyglot'
-Plug 'adelarsq/vim-matchit'
-
-" Colours
-Plug 'arcticicestudio/nord-vim'
+" UI
+Plug 'crispgm/nord-vim' " Fork of nord that provides treesitter support
+Plug 'Yggdroot/indentLine'
+Plug 'lukas-reineke/indent-blankline.nvim'
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'akinsho/nvim-bufferline.lua'
+Plug 'kyazdani42/nvim-tree.lua'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " Fzf
-Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
 " Git stuff
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 
-" Quick fix list improvements
+" Quick fix list enhancements
 Plug 'MattesGroeger/vim-bookmarks'
 Plug 'stefandtw/quickfix-reflector.vim'
-Plug 'yssl/QFEnter'
 
 " Text objects
 Plug 'kana/vim-textobj-user'
 Plug 'nelstrom/vim-textobj-rubyblock'
 
 " Other
-Plug 'ludovicchabant/vim-gutentags'
 Plug 'w0rp/ale'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'andymass/vim-matchup'
 Plug 'AndrewRadev/splitjoin.vim'
-Plug 'JamshedVesuna/vim-markdown-preview'
 call plug#end()
 
 " -----------------------------------------------------
 " Plugin settings
 " -----------------------------------------------------
-"  Polyglot
-" let g:polyglot_disabled=['markdown']
-
 " Nord
 let g:nord_italic = 1
 let g:nord_italic_comments = 1
 let g:nord_cursor_line_number_background = 1
 let g:nord_uniform_diff_background = 1
 colorscheme nord
+
+let g:bookmark_save_per_working_dir = 1
+let g:bookmark_auto_save = 1
 
 " ALE
 " Keyboard shortcuts for ALE
@@ -414,6 +312,7 @@ highlight ALEStyleWarningSign ctermfg=3
 let g:ale_fixers={
 \   'ruby': ['rubocop'],
 \   'eruby': ['rubocop'],
+\   'python': ['black'],
 \   'javascript': ['eslint', 'prettier'],
 \   'typescript': ['tslint', 'prettier'],
 \   'typescriptreact': ['tslint', 'prettier'],
@@ -426,33 +325,85 @@ imap <c-x><c-k> <plug>(fzf-complete-word)
 imap <c-x><c-f> <plug>(fzf-complete-path)
 imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 imap <c-x><c-l> <plug>(fzf-complete-line)
-let g:fzf_colors =
-\ { 'fg':      ['fg', 'Normal'],
-  \ 'bg':      ['bg', 'Normal'],
-  \ 'hl':      ['fg', 'Normal'],
-  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-  \ 'hl+':     ['fg', 'Statement'],
-  \ 'info':    ['fg', 'PreProc'],
-  \ 'border':  ['fg', 'Ignore'],
-  \ 'prompt':  ['fg', 'Conditional'],
-  \ 'pointer': ['fg', 'Exception'],
-  \ 'marker':  ['fg', 'Keyword'],
-  \ 'spinner': ['fg', 'Label'],
-  \ 'header':  ['fg', 'Normal'] }
 
-" Emmet
-let g:user_emmet_leader_key=','                            " Set emmet leader key
+let g:nvim_tree_width = 40
+let g:nvim_tree_ignore = [ '.git', 'node_modules' ] "empty by default
 
-" Vim Markdown preview
-let vim_markdown_preview_toggle=0                          " Use <C-p> to preview
-let vim_markdown_preview_github=1                          " Use GitHub flavoured markdown
-let vim_markdown_preview_temp_file=1                       " Automatically remove the rendered HTML file after opening
-let vim_markdown_preview_browser='Google Chrome'           " Use Google chrome to open markdown
+nnoremap <silent> <leader>n :NvimTreeFindFile<CR>
+nnoremap <silent> <C-n> :NvimTreeToggle<CR>
 
-" -----------------------------------------------------
-" Overrides
-" -----------------------------------------------------
-if filereadable(expand('~/.vimlocal/vimrc'))
-  source ~/.vimlocal/vimrc
-endif
+" Indent line
+let g:indentLine_char = '▏'
+
+lua <<EOF
+require('nvim-treesitter.configs').setup {
+  highlight = {
+    enable = true,
+    additional_vim_regex_highlighting = true,
+  },
+  indent = {
+    enable = true,
+  },
+}
+require('bufferline').setup {
+  options = {
+    mappings = true,
+    numbers = "ordinal",
+  },
+}
+require "nvim-web-devicons".setup {
+  override = {
+    html = {
+      icon = "",
+      color = "#DE8C92",
+      name = "html"
+    },
+    css = {
+      icon = "",
+      color = "#61afef",
+      name = "css"
+    },
+    js = {
+      icon = "",
+      color = "#EBCB8B",
+      name = "js"
+    },
+    ts = {
+      icon = "ﯤ",
+      color = "#519ABA",
+      name = "ts"
+    },
+    git = {
+      icon = "",
+      name = "git"
+    },
+    Dockerfile = {
+      icon = "",
+      color = "#b8b5ff",
+      name = "Dockerfile"
+    },
+    sh = {
+      icon = " ",
+      color = "#5E81AC",
+      name = "sh"
+    },
+    tags = {
+      icon = "",
+      color = "nBF616A",
+      name = "tags"
+    },
+    lock = {
+      icon = "",
+      color = "#BF616A",
+      name = "lock"
+    },
+  }
+}
+EOF
+
+" These commands will navigate through buffers in order regardless of which mode you are using
+" e.g. if you change the order of buffers :bnext and :bprevious will not respect the custom ordering
+nnoremap <silent><leader>j :BufferLineCyclePrev<CR>
+nnoremap <silent><leader>k :BufferLineCycleNext<CR>
+
+hi MatchParen ctermfg=red ctermbg=NONE guifg='#B48EAD' guibg=NONE
