@@ -20,10 +20,6 @@ require("nvim-web-devicons").setup {
       color = "#519ABA",
       name = "ts"
     },
-    git = {
-      icon = "",
-      name = "git"
-    },
     Dockerfile = {
       icon = "",
       color = "#b8b5ff",
@@ -36,7 +32,7 @@ require("nvim-web-devicons").setup {
     },
     tags = {
       icon = "",
-      color = "nBF616A",
+      color = "#BF616A",
       name = "tags"
     },
     lock = {

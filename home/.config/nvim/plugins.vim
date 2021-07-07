@@ -19,7 +19,7 @@ call plug#begin('~/.config/nvim/plugged')
 " Fork of nord-vim that provides treesitter support
 Plug 'crispgm/nord-vim'
 
-" Add snazy icons
+" Add snazzy icons
 Plug 'kyazdani42/nvim-web-devicons'
 
 " Treesitter
@@ -42,10 +42,13 @@ Plug 'junegunn/fzf.vim'
 " Git utilities
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
+Plug 'lewis6991/gitsigns.nvim'
 
 " Quick fix list enhancements
-Plug 'MattesGroeger/vim-bookmarks'
 Plug 'stefandtw/quickfix-reflector.vim'
+
+" Vim bookmarks plugin
+Plug 'MattesGroeger/vim-bookmarks'
 
 " LSP and auto-completion
 Plug 'neovim/nvim-lspconfig'
@@ -58,12 +61,30 @@ Plug 'nelstrom/vim-textobj-rubyblock'
 " Enhance parenthesis matching
 Plug 'andymass/vim-matchup'
 
+" Statusline
+Plug 'hoob3rt/lualine.nvim'
+" Plug '~/src/github.com/jonathangin52/lualine.nvim'
+
+" Floating terminal
+Plug 'numtostr/FTerm.nvim'
+
 " === Trial plugins ==="
 
-" Switch between single-line and multi-line forms of code
-Plug 'AndrewRadev/splitjoin.vim'
+" Color
+Plug 'norcalli/nvim-colorizer.lua'
 
-" Automatically generate tags
-Plug 'ludovicchabant/vim-gutentags'
+" Session management
+Plug 'rmagatti/auto-session'
+
+" Measure Vim's startuptime
+Plug 'tweekmonster/startuptime.vim'
+
+" Telescope
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+
+" Test
+Plug 'folke/which-key.nvim'
 
 call plug#end()

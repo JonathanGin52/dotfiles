@@ -8,6 +8,7 @@ require("nvim-treesitter.configs").setup {
   },
   indent = {
     enable = true,
+    disable_filetype = {"python", "ruby"},
   },
   textobjects = {
     select = {
