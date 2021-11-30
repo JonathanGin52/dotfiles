@@ -43,7 +43,6 @@ endif
 set wildignorecase                                         " Ignore case sensitivity in wildmenu (like tab-completing :commands)
 set lazyredraw                                             " Don't redraw the screen while executing macros
 set updatetime=800                                         " Reduce time before CursorHold event fires
-set hidden                                                 " Allow having unsaved changes in a buffer when navigating away
 set undofile
 set noswapfile
 
@@ -90,8 +89,6 @@ command! Q q
 command! Qa qa
 
 " === Yank and Paste === "
-" Make Y behave like D
-nnoremap Y y$
 " Yank to system clipboard
 nnoremap <leader>y "+y
 vnoremap <leader>y "+y
