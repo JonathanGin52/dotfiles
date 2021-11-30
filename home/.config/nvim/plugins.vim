@@ -16,11 +16,9 @@ endif
 
 call plug#begin('~/.config/nvim/plugged')
 
-" Fork of nord-vim that provides treesitter support
-Plug 'crispgm/nord-vim'
-
-" Add snazzy icons
+" Visual flair
 Plug 'kyazdani42/nvim-web-devicons'
+Plug 'rmehri01/onenord.nvim'
 
 " Treesitter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}

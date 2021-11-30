@@ -59,11 +59,6 @@ set scrolloff=5                                            " Always show 5 lines
 if (has('termguicolors'))
   set termguicolors                                        " Enable true color support
 endif
-let g:nord_italic = 1                                      " Enable italics 
-let g:nord_italic_comments = 1                             " Italicize comments
-let g:nord_cursor_line_number_background = 1               " Highlight line number column for active line
-let g:nord_uniform_diff_background = 1
-colorscheme nord
 
 " Highlight yanked text
 autocmd TextYankPost * silent! lua require('vim.highlight').on_yank()
@@ -159,6 +154,13 @@ require("bufferline").setup {
     numbers = "ordinal",
   },
 }
+require('onenord').setup({
+  italics = {
+    comments = true, -- Italic comments
+    keywords = false, -- Italic keywords
+  },
+})
+vim.cmd [[colorscheme onenord]]
 EOF
 
 " === Telescope === "
