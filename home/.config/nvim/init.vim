@@ -12,6 +12,9 @@ let mapleader="\<Space>"
 set tabstop=2 softtabstop=2 shiftwidth=2                   " Let tabs be 2 spaces wide
 set expandtab                                              " Turns tabs into spaces
 
+" Language specific indentation settings
+autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4"
+
 " === Mouse mode === "
 set mouse=n                                                " Enable mouse in Normal mode
 " Prevent mouse drag from visually selecting lines
@@ -86,6 +89,7 @@ command! Qa qa
 " === Yank and Paste === "
 " Yank to system clipboard
 nnoremap <leader>y "+y
+nnoremap <leader>Y "+y$
 vnoremap <leader>y "+y
 " Paste from system clipboard
 nnoremap <leader>p "+p
@@ -146,6 +150,14 @@ require('colorizer').setup()
 require('gitsigns').setup()
 require('auto-session').setup { pre_save_cmds = {'tabdo NvimTreeClose'} }
 require('telescope').setup { defaults = { file_ignore_patterns = {'rbi'} } }
+require('indent_blankline').setup {
+  show_first_indent_level = false,
+  use_treesitter = true,
+  filetype_exclude = {'help'},
+  buftype_exclude = {'terminal'},
+  show_current_context = true,
+  context_char = '┃',
+}
 require("bufferline").setup {
   options = {
     diagnostics = "nvim_lsp",
@@ -153,6 +165,12 @@ require("bufferline").setup {
   },
 }
 require('nvim-tree').setup {
+  filters = {
+    custom = {
+      '.git',
+      'node_modules',
+    },
+  },
   view = {
     width = 40,
   },
@@ -180,7 +198,6 @@ nnoremap <leader>gs :Git<cr>
 nnoremap <leader>gd :Gdiff<cr>
 
 " === nvim-tree === "
-let g:nvim_tree_ignore = [ '.git', 'node_modules' ]
 nnoremap <silent><C-n> :NvimTreeFindFile<CR>
 nnoremap <silent><leader>n :NvimTreeToggle<CR>
 
@@ -200,18 +217,11 @@ nnoremap <silent><leader>7 <Cmd>BufferLineGoToBuffer 7<CR>
 nnoremap <silent><leader>8 <Cmd>BufferLineGoToBuffer 8<CR>
 nnoremap <silent><leader>9 <Cmd>BufferLineGoToBuffer 9<CR>
 
-
 " === vim-bookmarks === "
 let g:bookmark_auto_save = 1
 let g:bookmark_auto_close = 1
 
 " === indent-blankline.nvim === "
-let g:indentLine_char = '▏'
-let g:indent_blankline_filetype_exclude = ['help']
-let g:indent_blankline_buftype_exclude = ['terminal']
-let g:indent_blankline_use_treesitter = v:true
-let g:indent_blankline_show_current_context = v:true
-let g:indent_blankline_show_first_indent_level = v:false
 " Temporary fix for highlighting bug https://github.com/lukas-reineke/indent-blankline.nvim/issues/59
 set colorcolumn=99999
 
