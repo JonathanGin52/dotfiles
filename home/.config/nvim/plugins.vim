@@ -25,7 +25,7 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 
 " Show indentation levels
-Plug 'lukas-reineke/indent-blankline.nvim', { 'branch': 'lua' }
+Plug 'lukas-reineke/indent-blankline.nvim'
 
 " Visual flair
 Plug 'akinsho/nvim-bufferline.lua'
@@ -60,14 +60,13 @@ Plug 'nelstrom/vim-textobj-rubyblock'
 Plug 'andymass/vim-matchup'
 
 " Statusline
-Plug 'hoob3rt/lualine.nvim'
+Plug 'nvim-lualine/lualine.nvim'
 " Plug '~/src/github.com/jonathangin52/lualine.nvim'
 
 " Floating terminal
 Plug 'numtostr/FTerm.nvim'
 
 " === Trial plugins ==="
-
 " Color
 Plug 'norcalli/nvim-colorizer.lua'
 
@@ -83,6 +82,7 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 
 " Test
-Plug 'folke/which-key.nvim'
+Plug 'junegunn/goyo.vim'
+Plug 'reedes/vim-pencil'
 
 call plug#end()

@@ -144,14 +144,17 @@ require('lsp')
 require('statusline')
 require('colorizer').setup()
 require('gitsigns').setup()
--- require("which-key").setup {}
 require('auto-session').setup { pre_save_cmds = {'tabdo NvimTreeClose'} }
 require('telescope').setup { defaults = { file_ignore_patterns = {'rbi'} } }
 require("bufferline").setup {
   options = {
-    mappings = true,
     diagnostics = "nvim_lsp",
     numbers = "ordinal",
+  },
+}
+require('nvim-tree').setup {
+  view = {
+    width = 40,
   },
 }
 require('onenord').setup({
@@ -177,7 +180,6 @@ nnoremap <leader>gs :Git<cr>
 nnoremap <leader>gd :Gdiff<cr>
 
 " === nvim-tree === "
-let g:nvim_tree_width = 40
 let g:nvim_tree_ignore = [ '.git', 'node_modules' ]
 nnoremap <silent><C-n> :NvimTreeFindFile<CR>
 nnoremap <silent><leader>n :NvimTreeToggle<CR>
@@ -187,6 +189,17 @@ nnoremap <silent><leader>n :NvimTreeToggle<CR>
 " e.g. if you change the order of buffers :bnext and :bprevious will not respect the custom ordering
 nnoremap <silent>[b :BufferLineCyclePrev<CR>
 nnoremap <silent>]b :BufferLineCycleNext<CR>
+
+nnoremap <silent><leader>1 <Cmd>BufferLineGoToBuffer 1<CR>
+nnoremap <silent><leader>2 <Cmd>BufferLineGoToBuffer 2<CR>
+nnoremap <silent><leader>3 <Cmd>BufferLineGoToBuffer 3<CR>
+nnoremap <silent><leader>4 <Cmd>BufferLineGoToBuffer 4<CR>
+nnoremap <silent><leader>5 <Cmd>BufferLineGoToBuffer 5<CR>
+nnoremap <silent><leader>6 <Cmd>BufferLineGoToBuffer 6<CR>
+nnoremap <silent><leader>7 <Cmd>BufferLineGoToBuffer 7<CR>
+nnoremap <silent><leader>8 <Cmd>BufferLineGoToBuffer 8<CR>
+nnoremap <silent><leader>9 <Cmd>BufferLineGoToBuffer 9<CR>
+
 
 " === vim-bookmarks === "
 let g:bookmark_auto_save = 1
@@ -207,6 +220,44 @@ set colorcolumn=99999
 highlight MatchParen ctermfg=red ctermbg=NONE guifg='#B48EAD' guibg=NONE
 
 " === FTerm.nvim === "
-lua require('FTerm').setup()
 nnoremap <silent><C-H> :lua require("FTerm").toggle()<CR>
 tnoremap <silent><C-H> <C-\><C-n>:lua require("FTerm").toggle()<CR>
+
+
+let w:ProseModeOn = 0
+
+function EnableProseMode()
+	setlocal spell
+	Goyo 66
+	SoftPencil
+	echo "Prose Mode On"
+endfu
+
+function DisableProseMode()
+	Goyo!
+	NoPencil
+	setlocal nospell
+	echo "Prose Mode Off"
+endfu
+
+function ToggleProseMode()
+	if w:ProseModeOn == 0
+		call EnableProseMode()
+		let w:ProseModeOn = 1
+	else
+		call DisableProseMode()
+	endif
+endfu
+
+command Prose call EnableProseMode()
+command UnProse call DisableProseMode()
+command ToggleProse call ToggleProseMode()
+
+function ScratchBufferize()
+	setlocal buftype=nofile
+	setlocal bufhidden=hide
+	setlocal noswapfile
+endfu
+
+nnoremap <Leader>d :new \| read ! sdcv <C-R><C-W> <CR>:call ScratchBufferize() <CR>:normal gg<CR>
+nnoremap <Leader>s :new \| read ! moby <C-R><C-W> \| tr , '\n' <CR>:call ScratchBufferize() <CR>:normal gg2dd <CR>
