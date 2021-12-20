@@ -1,14 +1,8 @@
 require("nvim-treesitter.configs").setup {
-  -- Install all maintained parsers
   ensure_installed = "maintained",
-
   highlight = {
     enable = true,
     additional_vim_regex_highlighting = true,
-  },
-  indent = {
-    enable = true,
-    disable_filetype = {"python", "ruby"},
   },
   textobjects = {
     select = {

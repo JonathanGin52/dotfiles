@@ -30,7 +30,7 @@ custom_nord.terminal = custom_nord.insert
 
 lualine.setup{
   options = {
-    theme = custom_nord,
+    theme = 'onenord',
   },
   sections = {
     lualine_b = { { 'filename', symbols = { modified = ' ', readonly = ' ' } } },
