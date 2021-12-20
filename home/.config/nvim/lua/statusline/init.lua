@@ -38,7 +38,7 @@ lualine.setup{
       { 'branch', separator = '' },
       { 'diff', left_padding = 0, symbols = { added = ' ', modified = ' ', removed = ' ' } }
     },
-    lualine_x = { { 'diagnostics', sources = { 'nvim_lsp' } } },
+    lualine_x = { { 'diagnostics', sources = { 'nvim_diagnostic' } } },
     lualine_y = { 'filetype' },
     lualine_z = { file_location, file_percent },
   },
@@ -46,7 +46,7 @@ lualine.setup{
     lualine_b = { { 'filename', symbols = { modified = ' ', readonly = ' ' } } },
       
     lualine_c = { { 'diff', symbols = { added = ' ', modified = ' ', removed = ' ' } } },
-    lualine_x = { { 'diagnostics', sources = { 'nvim_lsp' } } },
+    lualine_x = { { 'diagnostics', sources = { 'nvim_diagnostic' } } },
     lualine_y = { 'filetype' },
   },
   extensions = { 'fzf', 'nvim-tree', 'fugitive' },
