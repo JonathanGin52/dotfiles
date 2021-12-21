@@ -103,17 +103,17 @@ window:
 font:
   # Normal (roman) font face
   normal:
-    family: Source Code Pro
+    family: SauceCodePro Nerd Font
     style: Regular
 
   # Bold font face
   bold:
-    family: Source Code Pro
+    family: SauceCodePro Nerd Font
     style: Bold
 
   # Italic font face
   italic:
-    family: Source Code Pro
+    family: SauceCodePro Nerd Font
     style: Italic
 
   # Point size
@@ -150,32 +150,58 @@ font:
 
 # If `true`, bold text is drawn using the bright color variants.
 #draw_bold_text_with_bright_colors: true
-
 colors:
+  # Default colors
   primary:
     background: '0x2E3440'
-    foreground: '0xD8DEE9'
-  cursor:
-    text: '0x2E3440'
-    cursor: '0xD8DEE9'
+    foreground: '0xC8D0E0'
+
+  # Normal colors
   normal:
-    black: '0x3B4252'
-    red: '0xBF616A'
-    green: '0xA3BE8C'
-    yellow: '0xEBCB8B'
-    blue: '0x81A1C1'
-    magenta: '0xB48EAD'
-    cyan: '0x88C0D0'
-    white: '0xE5E9F0'
+    black:   '0x3B4252'
+    red:     '0xBF616A'
+    green:   '0xA3BE8C'
+    yellow:  '0xEBCB8B'
+    blue:    '0x81A1C1'
+    magenta: '0xB988B0'
+    cyan:    '0x88C0D0'
+    white:   '0xE5E9F0'
+
+  # Bright colors
   bright:
-    black: '0x4C566A'
-    red: '0xBF616A'
-    green: '0xA3BE8C'
-    yellow: '0xEBCB8B'
-    blue: '0x81A1C1'
-    magenta: '0xB48EAD'
-    cyan: '0x8FBCBB'
-    white: '0xECEFF4'
+    black:   '0x4C566A'
+    red:     '0xBF616A'
+    green:   '0xA3BE8C'
+    yellow:  '0xEBCB8B'
+    blue:    '0x81A1C1'
+    magenta: '0xB988B0'
+    cyan:    '0x8FBCBB'
+    white:   '0xECEFF4'
+
+  search:
+    matches:
+     foreground: '#81A1C1'
+     background: '#4C566A'
+    focused_match:
+     foreground: '#EBCB8B'
+     background: '#4C566A'
+
+    bar:
+     background: '#434C5E'
+     foreground: '#88C0D0'
+
+  hints:
+    start:
+     foreground: '#B988B0'
+     background: '#4C566A'
+
+    end:
+     foreground: '#81A1C1'
+     background: '#4C566A'
+
+  selection:
+   text: CellForeground
+   background: '#434C5E'
   # Indexed Colors
   #
   # The indexed colors include all colors from 16 to 256.
