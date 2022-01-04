@@ -32,7 +32,7 @@ set smartcase                                              " But case-sensitive 
 set incsearch                                              " Show matches as characters are entered
 
 " === Completion === "
-set completeopt=menuone,noselect                           " Set completeopt to have a better completion experience
+set completeopt=menu,noselect                              " Set completeopt to have a better completion experience
 set shortmess+=c                                           " Avoid showing message extra message when using completion
 "
 " === Vim Grep === "
@@ -166,19 +166,13 @@ require("bufferline").setup {
 }
 require('nvim-tree').setup {
   filters = {
-    custom = {
-      '.git',
-      'node_modules',
-    },
+    custom = {'.git', 'node_modules'},
   },
-  view = {
-    width = 40,
-  },
+  view = {width = 40},
 }
 require('onenord').setup({
-  italics = {
-    comments = true, -- Italic comments
-    keywords = false, -- Italic keywords
+  styles = {
+    comments = 'italic',
   },
 })
 vim.cmd [[colorscheme onenord]]

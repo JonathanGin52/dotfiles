@@ -4,6 +4,9 @@ require("nvim-treesitter.configs").setup {
     enable = true,
     additional_vim_regex_highlighting = true,
   },
+  matchup = {
+    enable = true,
+  },
   textobjects = {
     select = {
       -- disabling until Ruby support is added. Using vim-textobj-rubyblock for now

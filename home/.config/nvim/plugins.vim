@@ -50,7 +50,10 @@ Plug 'MattesGroeger/vim-bookmarks'
 
 " LSP and auto-completion
 Plug 'neovim/nvim-lspconfig'
-Plug 'hrsh7th/nvim-compe'
+Plug 'onsails/lspkind-nvim'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/nvim-cmp'
 
 " User defined text objects
 Plug 'kana/vim-textobj-user'
@@ -82,6 +85,7 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 
 " Test
+Plug 'AndrewRadev/splitjoin.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'reedes/vim-pencil'
 
