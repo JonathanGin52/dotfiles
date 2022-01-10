@@ -88,5 +88,6 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'reedes/vim-pencil'
+Plug 'ggandor/lightspeed.nvim'
 
 call plug#end()
