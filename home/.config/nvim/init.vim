@@ -146,6 +146,7 @@ require('devicons')
 require('treesitter')
 require('lsp')
 require('statusline')
+require("which-key")
 require('colorizer').setup()
 require('gitsigns').setup()
 require('auto-session').setup { pre_save_cmds = {'tabdo NvimTreeClose'} }
