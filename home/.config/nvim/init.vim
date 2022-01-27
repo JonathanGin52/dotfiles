@@ -151,6 +151,7 @@ require('colorizer').setup()
 require('gitsigns').setup()
 require('auto-session').setup { pre_save_cmds = {'tabdo NvimTreeClose'} }
 require('telescope').setup { defaults = { file_ignore_patterns = {'rbi'} } }
+require('telescope').load_extension('fzf')
 require('indent_blankline').setup {
   show_first_indent_level = false,
   use_treesitter = true,
@@ -180,13 +181,13 @@ vim.cmd [[colorscheme onenord]]
 EOF
 
 " === Telescope === "
-" nnoremap <silent><leader>t :Telescope find_files<CR>
-" nnoremap <silent><leader>b :Telescope buffers<CR>
+nnoremap <silent><leader>t :Telescope find_files<CR>
+nnoremap <silent><leader>b :Telescope buffers<CR>
 nnoremap <silent><leader>g :Telescope live_grep<CR>
 
 " === fzf ==="
-nnoremap <silent><leader>t :Files<CR>
-nnoremap <silent><leader>b :Buffers<CR>
+" nnoremap <silent><leader>t :Files<CR>
+" nnoremap <silent><leader>b :Buffers<CR>
 
 " === vim-fugitive === "
 nnoremap <leader>gs :Git<cr>
