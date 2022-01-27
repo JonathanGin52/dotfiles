@@ -44,8 +44,8 @@ local lspkind = require('lspkind')
 local cmp = require('cmp')
 cmp.setup {
   sources = {
-    { name = 'buffer' },
     { name = 'nvim_lsp' },
+    { name = 'buffer' },
   },
   mapping = {
     ["<cr>"] = cmp.mapping.confirm({select = true}),

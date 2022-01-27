@@ -91,5 +91,6 @@ Plug 'junegunn/goyo.vim'
 Plug 'reedes/vim-pencil'
 Plug 'ggandor/lightspeed.nvim'
 Plug 'folke/which-key.nvim'
+Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 
 call plug#end()
