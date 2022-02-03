@@ -191,12 +191,6 @@ require('indent_blankline').setup {
   show_current_context = true,
   context_char = '┃',
 }
-require("bufferline").setup {
-  options = {
-    diagnostics = "nvim_lsp",
-    numbers = "ordinal",
-  },
-}
 require('nvim-tree').setup {
   filters = {
     custom = {'.git', 'node_modules'},
@@ -250,6 +244,7 @@ let g:bookmark_auto_close = 1
 
 " === Firevim === "
 if exists('g:started_by_firenvim')
+  set laststatus=0
   let g:auto_session_enabled = v:false
   set guifont=SauceCodePro\ Nerd\ Font ":h20
   setlocal spell
@@ -271,6 +266,16 @@ if exists('g:started_by_firenvim')
   let fc = g:firenvim_config['localSettings']
   let fc['https?://[^/]*messenger.com/*'] = { 'takeover': 'never', 'priority': 1 }
   let fc['https?://[^/]*twitch.tv/*'] = { 'takeover': 'never', 'priority': 1 }
+  let fc['https?://[^/]*notion.so/*'] = { 'takeover': 'never', 'priority': 1 }
+else
+lua <<EOF
+  require("bufferline").setup {
+    options = {
+      diagnostics = "nvim_lsp",
+      numbers = "ordinal",
+    },
+  }
+EOF
 endif
 
 " === indent-blankline.nvim === "
