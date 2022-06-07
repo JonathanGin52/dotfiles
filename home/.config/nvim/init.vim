@@ -259,14 +259,10 @@ if exists('g:started_by_firenvim')
 \       'content': 'text',
 \       'priority': 0,
 \       'selector': 'textarea',
-\       'takeover': 'always',
+\       'takeover': 'never',
 \     },
 \   }
 \ }
-  let fc = g:firenvim_config['localSettings']
-  let fc['https?://[^/]*messenger.com/*'] = { 'takeover': 'never', 'priority': 1 }
-  let fc['https?://[^/]*twitch.tv/*'] = { 'takeover': 'never', 'priority': 1 }
-  let fc['https?://[^/]*notion.so/*'] = { 'takeover': 'never', 'priority': 1 }
 else
 lua <<EOF
   require("bufferline").setup {
