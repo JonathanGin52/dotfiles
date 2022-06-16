@@ -92,5 +92,6 @@ Plug 'reedes/vim-pencil'
 Plug 'ggandor/lightspeed.nvim'
 Plug 'folke/which-key.nvim'
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+Plug 'github/copilot.vim'
 
 call plug#end()

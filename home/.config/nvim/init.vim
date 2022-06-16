@@ -246,7 +246,7 @@ let g:bookmark_auto_close = 1
 if exists('g:started_by_firenvim')
   set laststatus=0
   let g:auto_session_enabled = v:false
-  set guifont=SauceCodePro\ Nerd\ Font ":h20
+  set guifont=SauceCodePro\ Nerd\ Font:h20
   setlocal spell
   au BufEnter github.com_*.txt set filetype=markdown
   let g:firenvim_config = {
