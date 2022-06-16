@@ -4,7 +4,21 @@ exec > >(tee -i $HOME/dotfiles_install.log)
 exec 2>&1
 set -x
 
-sudo apt-get install -y neovim fzf ripgrep tmux
+export TERM=xterm-256color
+
+sudo apt-get update
+sudo apt-get install -y --no-install-recommends \
+ zsh \
+ tmux \
+ jq \
+ ripgrep \
+ fzf
+
+# Install latest neovim release
+sudo apt-get install -y fuse
+wget https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
+chmod u+x nvim.appimage
+sudo mv ./nvim.appimage /usr/local-bin/nvim
 
 ln -s $(pwd)/home/.tmux.conf $HOME/.tmux.conf
 ln -s $(pwd)/home/.config/nvim $HOME/.config/nvim
