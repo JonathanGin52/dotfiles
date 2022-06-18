@@ -17,12 +17,12 @@ sudo apt-get install -y --no-install-recommends \
 # Install latest neovim release
 sudo apt-get install -y fuse
 wget https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
-chmod u+x nvim.appimage
-sudo mv ./nvim.appimage /usr/local-bin/nvim
+chmod u+x $(pwd)/nvim.appimage
+sudo mv $(pwd)/nvim.appimage /usr/local/bin/nvim
 
-ln -s $(pwd)/home/.tmux.conf $HOME/.tmux.conf
-ln -s $(pwd)/home/.config/nvim $HOME/.config/nvim
-ln -s $(pwd)/home/.config/bat $HOME/.config/bat
+ln -sf $(pwd)/home/.tmux.conf $HOME/.tmux.conf
+ln -sf $(pwd)/home/.config/nvim $HOME/.config/nvim
+ln -sf $(pwd)/home/.config/bat $HOME/.config/bat
 
 # ln -s $(pwd)/home/.zshrc $HOME/.zshrc
 
