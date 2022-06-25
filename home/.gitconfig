@@ -1,13 +1,12 @@
 [user]
   name = Jonathan Gin
-  email = jonathangin52@gmail.com
+  email = jonathangin52@github.com
 [core]
   editor = nvim
   excludesfile = /Users/jonathangin/.gitignore_global
 	commitGraph = true
 	pager = diff-so-fancy | less --tabs=4 -RFX
 [alias]
-  co = checkout
   hist = log --graph --pretty='''%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset''' --all
   cleanup = "!git branch --merged | rg  -v '\\*\\|master\\|main' | xargs -n 1 git branch -d"
   ctags = !.git/hooks/ctags
@@ -17,11 +16,6 @@
   algorithm = patience
 [protocol]
   version = 2
-[url "https://github.com/Shopify/"]
-	insteadOf = git@github.com:Shopify/
-	insteadOf = git@github.com:shopify/
-	insteadOf = ssh://git@github.com/Shopify/
-	insteadOf = ssh://git@github.com/shopify/
 [gc]
 	writeCommitGraph = true
 [color]
@@ -40,8 +34,5 @@
 	whitespace = red reverse
 [diff-so-fancy]
 	markEmptyLines = false
-[credential]
-	helper = 
-	helper = store --file /opt/dev/var/private/git_credential_store
 [pull]
 	ff = only

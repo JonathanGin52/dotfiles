@@ -34,7 +34,7 @@ set incsearch                                              " Show matches as cha
 " === Completion === "
 set completeopt=menu,noselect                              " Set completeopt to have a better completion experience
 set shortmess+=c                                           " Avoid showing message extra message when using completion
-"
+
 " === Vim Grep === "
 " Use ripgrep when available
 if executable('rg')
