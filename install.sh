@@ -27,6 +27,7 @@ ln -sf $(pwd)/home/.gitconfig $HOME/.gitconfig
 # ln -s $(pwd)/home/.zshrc $HOME/.zshrc
 
 echo "export TERM=xterm-256color" >> $HOME/.zshrc
+echo "alias vim=nvim" >> $HOME/.zshrc
 
-nvim +'PlugInstall --sync' +qa
 sudo chsh -s "$(which zsh)" "$(whoami)"
+nvim +'PlugInstall --sync' +qa
