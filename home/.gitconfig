@@ -36,3 +36,5 @@
 	markEmptyLines = false
 [pull]
 	ff = only
+[push]
+	autoSetupRemote = true
