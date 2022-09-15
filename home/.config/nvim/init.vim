@@ -96,6 +96,20 @@ nnoremap <leader>p "+p
 vnoremap <leader>p "+p
 nnoremap <leader>P "+P
 
+lua <<EOF
+vim.g.clipboard = {
+  name = "rdm",
+  copy = {
+    ["+"] = {"rdm", "copy"},
+    ["*"] = {"rdm", "copy"}
+  },
+  paste = {
+    ["+"] = {"rdm", "paste"},
+    ["*"] = {"rdm", "paste"}
+  },
+}
+EOF
+
 " === Quickfix & Location List === "
 " List navigation
 nnoremap <silent>[q :cprevious<CR>
@@ -246,7 +260,7 @@ let g:bookmark_auto_close = 1
 if exists('g:started_by_firenvim')
   set laststatus=0
   let g:auto_session_enabled = v:false
-  set guifont=SauceCodePro\ Nerd\ Font:h20
+  set guifont=SauceCodePro\ Nerd\ Font ":h20
   setlocal spell
   au BufEnter github.com_*.txt set filetype=markdown
   let g:firenvim_config = {
