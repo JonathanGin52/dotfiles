@@ -256,28 +256,8 @@ nnoremap <silent><leader>9 <Cmd>BufferLineGoToBuffer 9<CR>
 let g:bookmark_auto_save = 1
 let g:bookmark_auto_close = 1
 
-" === Firevim === "
-if exists('g:started_by_firenvim')
-  set laststatus=0
-  let g:auto_session_enabled = v:false
-  set guifont=SauceCodePro\ Nerd\ Font ":h20
-  setlocal spell
-  au BufEnter github.com_*.txt set filetype=markdown
-  let g:firenvim_config = {
-\   'globalSettings': {
-\     'alt': 'all',
-\    },
-\   'localSettings': {
-\     '.*': {
-\       'cmdline': 'neovim',
-\       'content': 'text',
-\       'priority': 0,
-\       'selector': 'textarea',
-\       'takeover': 'never',
-\     },
-\   }
-\ }
-else
+
+" === bufferline === "
 lua <<EOF
   require("bufferline").setup {
     options = {
@@ -286,7 +266,6 @@ lua <<EOF
     },
   }
 EOF
-endif
 
 " === indent-blankline.nvim === "
 " Temporary fix for highlighting bug https://github.com/lukas-reineke/indent-blankline.nvim/issues/59

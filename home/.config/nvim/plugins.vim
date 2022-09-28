@@ -87,6 +87,5 @@ Plug 'reedes/vim-pencil'
 Plug 'ggandor/lightspeed.nvim'
 Plug 'tpope/vim-repeat'
 Plug 'folke/which-key.nvim'
-Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 
 call plug#end()
