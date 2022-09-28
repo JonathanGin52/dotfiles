@@ -19,6 +19,7 @@ call plug#begin('~/.config/nvim/plugged')
 " Visual flair
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'rmehri01/onenord.nvim'
+Plug 'akinsho/nvim-bufferline.lua'
 
 " Treesitter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -26,9 +27,6 @@ Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 
 " Show indentation levels
 Plug 'lukas-reineke/indent-blankline.nvim'
-
-" Visual flair
-Plug 'akinsho/nvim-bufferline.lua'
 
 " File tree navigation
 Plug 'kyazdani42/nvim-tree.lua'
@@ -54,6 +52,7 @@ Plug 'onsails/lspkind-nvim'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/nvim-cmp'
+Plug 'github/copilot.vim'
 
 " User defined text objects
 Plug 'kana/vim-textobj-user'
@@ -64,7 +63,6 @@ Plug 'andymass/vim-matchup'
 
 " Statusline
 Plug 'nvim-lualine/lualine.nvim'
-" Plug '~/src/github.com/jonathangin52/lualine.nvim'
 
 " Floating terminal
 Plug 'numtostr/FTerm.nvim'
@@ -75,9 +73,6 @@ Plug 'norcalli/nvim-colorizer.lua'
 
 " Session management
 Plug 'rmagatti/auto-session'
-
-" Measure Vim's startuptime
-Plug 'tweekmonster/startuptime.vim'
 
 " Telescope
 Plug 'nvim-lua/popup.nvim'
@@ -90,8 +85,8 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'reedes/vim-pencil'
 Plug 'ggandor/lightspeed.nvim'
+Plug 'tpope/vim-repeat'
 Plug 'folke/which-key.nvim'
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
-Plug 'github/copilot.vim'
 
 call plug#end()
