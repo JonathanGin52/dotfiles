@@ -10,7 +10,6 @@ lspkind.init({
 })
 vim.api.nvim_set_hl(0, "CmpItemKindCopilot", {fg ="#6CC644"})
 
-
 local has_words_before = function()
   if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then return false end
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -49,20 +48,16 @@ cmp.setup({
       end
     end, { 'i', 's' }),
   }),
-
   formatting = {
     format = lspkind.cmp_format()
   },
-
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
     { name = 'nvim_lsp_signature_help' },
     { name = 'copilot' },
-    { name = 'treesitter' },
     { name = 'luasnip' },
-    { name = 'buffer' }
+    { name = 'buffer' },
   }),
-
   experimental = {
     ghost_text = true,
   },

@@ -97,17 +97,19 @@ vnoremap <leader>p "+p
 nnoremap <leader>P "+P
 
 lua <<EOF
-vim.g.clipboard = {
-  name = "rdm",
-  copy = {
-    ["+"] = {"rdm", "copy"},
-    ["*"] = {"rdm", "copy"}
-  },
-  paste = {
-    ["+"] = {"rdm", "paste"},
-    ["*"] = {"rdm", "paste"}
-  },
-}
+if os.getenv("CODESPACES") then
+  vim.g.clipboard = {
+    name = "rdm",
+    copy = {
+      ["+"] = {"rdm", "copy"},
+      ["*"] = {"rdm", "copy"}
+    },
+    paste = {
+      ["+"] = {"rdm", "paste"},
+      ["*"] = {"rdm", "paste"}
+    },
+  }
+end
 EOF
 
 " === Quickfix & Location List === "
@@ -158,9 +160,6 @@ nnoremap <silent><leader><leader> :nohlsearc<cr>
 lua <<EOF
 require("plugins")
 require('nvim-tree').setup {
-  -- filters = {
-  --   custom = {'.git', 'node_modules'},
-  -- },
   view = {width = 40},
 }
 require('onenord').setup({

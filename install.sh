@@ -19,10 +19,9 @@ sudo apt-get install -y --no-install-recommends \
 # chmod u+x $(pwd)/nvim.appimage
 # sudo mv $(pwd)/nvim.appimage /usr/local/bin/nvim
 
-ln -sf $(pwd)/home/.tmux.conf $HOME/.tmux.conf
-ln -sf $(pwd)/home/.config/nvim $HOME/.config/nvim
-ln -sf $(pwd)/home/.config/nvim $HOME/.config/nvim
-ln -sf $(pwd)/home/.gitconfig $HOME/.gitconfig
+ln -sf $(pwd)/home/tmux.conf $HOME/.tmux.conf
+ln -sf $(pwd)/home/gitconfig $HOME/.gitconfig
+ln -sf $(pwd)/home/config/nvim $HOME/.config/nvim
 
 # ln -s $(pwd)/home/.zshrc $HOME/.zshrc
 

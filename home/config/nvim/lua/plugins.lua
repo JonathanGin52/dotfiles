@@ -11,14 +11,43 @@ end
 
 local packer_bootstrap = ensure_packer()
 
+-- Automatically compile Packer on write
+vim.cmd([[
+  augroup packer_user_config
+    autocmd!
+    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+  augroup end
+]])
+
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim' -- packer can manage itself
 
+  -- Colour palate
   use 'rmehri01/onenord.nvim'
+  
+  -- UI Elements
   use {
     'akinsho/nvim-bufferline.lua',
     requires = 'kyazdani42/nvim-web-devicons',
     config = [[require('config.bufferline')]],
+  }
+  -- Statusline
+  use {
+    'nvim-lualine/lualine.nvim',
+    requires = 'kyazdani42/nvim-web-devicons',
+    config = [[require('config.lualine')]],
+  }
+  -- File tree navigation
+  use {
+    'kyazdani42/nvim-tree.lua',
+    requires = 'kyazdani42/nvim-web-devicons', 
+  }
+
+  use {
+    'rcarriga/nvim-notify',
+    config = function()
+      vim.notify = require('notify')
+    end
   }
 
   -- Treesitter
@@ -41,11 +70,6 @@ return require('packer').startup(function(use)
   use {
     'kyazdani42/nvim-web-devicons', 
     config = [[require('config.devicons')]],
-  }
-  -- File tree navigation
-  use {
-    'kyazdani42/nvim-tree.lua',
-    requires = 'kyazdani42/nvim-web-devicons', 
   }
 
   -- Fzf
@@ -126,13 +150,6 @@ return require('packer').startup(function(use)
   -- Enhance parenthesis matching
   use 'andymass/vim-matchup'
 
-  -- Statusline
-  use {
-    'nvim-lualine/lualine.nvim',
-    requires = 'kyazdani42/nvim-web-devicons',
-    config = [[require('config.lualine')]],
-  }
-
   -- Floating terminal
   use {
     'akinsho/toggleterm.nvim',
@@ -167,7 +184,7 @@ return require('packer').startup(function(use)
   use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
   -- Test
-  use 'AndrewRadev/splitjoin.vim'
+  -- use 'AndrewRadev/splitjoin.vim'
   use {
     'ggandor/lightspeed.nvim',
     requires = 'tpope/vim-repeat',
@@ -181,12 +198,6 @@ return require('packer').startup(function(use)
   use {
     'numToStr/Comment.nvim',
     config = [[require('Comment').setup()]],
-  }
-  use {
-    'rcarriga/nvim-notify',
-    config = function()
-      vim.notify = require('notify')
-    end
   }
 
   -- Automatically set up your configuration after cloning packer.nvim
