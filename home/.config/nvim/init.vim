@@ -25,6 +25,7 @@ noremap! <LeftDrag> <LeftMouse>
 " More natural splitting
 set splitbelow                                             " Open new splits below the current active one
 set splitright                                             " Open new splits to the right of the current active one
+set hidden                                                 " Allow switching buffers without saving
 
 " === Searching === "
 set ignorecase                                             " Ignore case in search
@@ -162,7 +163,7 @@ require('lsp')
 require('statusline')
 require("which-key")
 require('colorizer').setup()
--- Remove when upgrading to nvim0.7
+require('Comment').setup()
 require('gitsigns').setup {
   on_attach = function(bufnr)
     local gs = package.loaded.gitsigns
@@ -274,20 +275,26 @@ lua <<EOF
       numbers = "ordinal",
     },
   }
-EOF
+require("toggleterm").setup{
+  open_mapping = [[<c-h>]],
+}
+function _G.set_terminal_keymaps()
+  local opts = {buffer = 0}
+  vim.keymap.set('t', '<esc>', [[<C-\><C-h>]], opts)
+  vim.keymap.set('t', 'hh', [[<C-\><C-h>]], opts)
+  vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
+  vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
+  vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
+  vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
+end
 
-" === indent-blankline.nvim === "
-" Temporary fix for highlighting bug https://github.com/lukas-reineke/indent-blankline.nvim/issues/59
-set colorcolumn=99999
+-- if you only want these mappings for toggle term use term://*toggleterm#* instead
+vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
+EOF
 
 " === vim-matchup === "
 " Colour matching parenthesis
 highlight MatchParen ctermfg=red ctermbg=NONE guifg='#B48EAD' guibg=NONE
-
-" === FTerm.nvim === "
-nnoremap <silent><C-H> :lua require("FTerm").toggle()<CR>
-tnoremap <silent><C-H> <C-\><C-n>:lua require("FTerm").toggle()<CR>
-
 
 let w:ProseModeOn = 0
 

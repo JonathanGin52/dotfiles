@@ -53,6 +53,7 @@ Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'github/copilot.vim'
+Plug 'jose-elias-alvarez/null-ls.nvim'
 
 " User defined text objects
 Plug 'kana/vim-textobj-user'
@@ -65,7 +66,7 @@ Plug 'andymass/vim-matchup'
 Plug 'nvim-lualine/lualine.nvim'
 
 " Floating terminal
-Plug 'numtostr/FTerm.nvim'
+Plug 'akinsho/toggleterm.nvim'
 
 " === Trial plugins ==="
 " Color
@@ -87,5 +88,6 @@ Plug 'reedes/vim-pencil'
 Plug 'ggandor/lightspeed.nvim'
 Plug 'tpope/vim-repeat'
 Plug 'folke/which-key.nvim'
+Plug 'numToStr/Comment.nvim'
 
 call plug#end()
