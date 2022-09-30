@@ -32,10 +32,11 @@ end
 
 -- Use a loop to conveniently both setup defined servers 
 -- and map buffer local keybindings when the language server attaches
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 local servers = { "solargraph", "sorbet", "tsserver", "gopls", "vimls", "pyright" }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
-    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+    capabilities = capabilities,
     on_attach = on_attach,
   }
 end
