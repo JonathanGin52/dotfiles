@@ -49,5 +49,5 @@ lualine.setup{
     lualine_x = { { 'diagnostics', sources = { 'nvim_diagnostic' } } },
     lualine_y = { 'filetype' },
   },
-  extensions = { 'fzf', 'nvim-tree', 'fugitive' },
+  extensions = { 'toggleterm', 'fzf', 'nvim-tree', 'fugitive' },
 }

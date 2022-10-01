@@ -1,98 +1,197 @@
-local execute = vim.api.nvim_command
-local fn = vim.fn
-
-local install_path = fn.stdpath('data')..'/site/pack/packer/opt/packer.nvim'
-
-if fn.empty(fn.glob(install_path)) > 0 then
-  fn.system({'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path})
-  execute 'packadd packer.nvim'
+local ensure_packer = function()
+  local fn = vim.fn
+  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+  if fn.empty(fn.glob(install_path)) > 0 then
+    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+    vim.cmd [[packadd packer.nvim]]
+    return true
+  end
+  return false
 end
-return require('packer').startup(function()
-  -- Packer can manage itself
-  use 'wbthomason/packer.nvim'
 
-  -- Indentation tracking
+local packer_bootstrap = ensure_packer()
+
+return require('packer').startup(function(use)
+  use 'wbthomason/packer.nvim' -- packer can manage itself
+
+  use 'rmehri01/onenord.nvim'
   use {
-    'lukas-reineke/indent-blankline.nvim',
-    branch = 'lua',
-    setup = [[require('config.indentline')]]
+    'akinsho/nvim-bufferline.lua',
+    requires = 'kyazdani42/nvim-web-devicons',
+    config = [[require('config.bufferline')]],
   }
 
-  use {'akinsho/nvim-bufferline.lua', requires = 'kyazdani42/nvim-web-devicons'}
-
-  -- Load on an autocommand event
-  use {'andymass/vim-matchup', event = 'VimEnter'}
-
-  -- Fork of nord-vim that provides treesitter support
-  use 'crispgm/nord-vim'
-
-  -- Add snazy icons
-  use 'kyazdani42/nvim-web-devicons'
-
   -- Treesitter
-  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-  use 'nvim-treesitter/nvim-treesitter-textobjects'
+  use {
+    'nvim-treesitter/nvim-treesitter',
+    config = [[require('config.treesitter')]],
+    run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
+  }
+  use {
+    'nvim-treesitter/nvim-treesitter-textobjects',
+    requires = 'nvim-treesitter/nvim-treesitter',
+  }
 
   -- Show indentation levels
-  use 'lukas-reineke/indent-blankline.nvim', { 'branch': 'lua' }
+  use {
+    'lukas-reineke/indent-blankline.nvim',
+    config = [[require('config.indent_blankline')]],
+  }
 
-  -- Visual flair
-  use 'akinsho/nvim-bufferline.lua'
-
+  use {
+    'kyazdani42/nvim-web-devicons', 
+    config = [[require('config.devicons')]],
+  }
   -- File tree navigation
-  use 'kyazdani42/nvim-tree.lua'
+  use {
+    'kyazdani42/nvim-tree.lua',
+    requires = 'kyazdani42/nvim-web-devicons', 
+  }
 
   -- Fzf
-  use { 'junegunn/fzf', run = function() vim.fn['fzf#install']() end }
   use 'junegunn/fzf.vim'
 
   -- Git utilities
-  use 'tpope/vim-fugitive'
   use {
-    'tpope/vim-rhubarb',
-    requires = { 'tpope/vim-fugitive' },
+    'tpope/vim-fugitive',
+    requires = 'tpope/vim-rhubarb',
+  }
+  use {
+    'lewis6991/gitsigns.nvim',
+    requires = { 'tpope/vim-repeat', 'tpope/vim-fugitive' },
+    config = [[require('config.gitsigns')]],
   }
 
   -- Quick fix list enhancements
-  use 'MattesGroeger/vim-bookmarks'
   use 'stefandtw/quickfix-reflector.vim'
 
+  -- Vim bookmarks plugin
+  use 'MattesGroeger/vim-bookmarks'
+
   -- LSP and auto-completion
+  -- Snippets
+  use {
+    'L3MON4D3/LuaSnip',
+    requires = 'rafamadriz/friendly-snippets',
+    config = function() require('luasnip.loaders.from_vscode').lazy_load() end,
+  }
+
+  -- Completion
+  use {
+    'hrsh7th/nvim-cmp',
+    requires = {
+      'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-nvim-lsp-signature-help',
+      'hrsh7th/cmp-nvim-lsp-document-symbol',
+      'hrsh7th/cmp-buffer',
+      'hrsh7th/cmp-path',
+      'hrsh7th/cmp-cmdline',
+      'saadparwaiz1/cmp_luasnip',
+      'onsails/lspkind-nvim',
+    },
+    config = [[require('config.cmp')]],
+  }
+
   use 'neovim/nvim-lspconfig'
-  use 'hrsh7th/nvim-compe'
+
+  use 'github/copilot.vim'
+  use {
+    "zbirenbaum/copilot.lua",
+    event = {"VimEnter"},
+    config = function()
+      vim.defer_fn(function()
+        require("copilot").setup()
+      end, 100)
+    end,
+  }
+  use {
+    "zbirenbaum/copilot-cmp",
+    after = { "copilot.lua" },
+    config = function ()
+      require("copilot_cmp").setup()
+    end
+  }
+
+  use {
+    'jose-elias-alvarez/null-ls.nvim',
+    requires = 'nvim-lua/plenary.nvim',
+  }
 
   -- User defined text objects
-  use 'kana/vim-textobj-user'
-  use 'nelstrom/vim-textobj-rubyblock'
+  use {
+    'nelstrom/vim-textobj-rubyblock',
+    requires = 'kana/vim-textobj-user',
+  }
 
   -- Enhance parenthesis matching
   use 'andymass/vim-matchup'
 
-  -- === Trial plugins ===--
-
-  -- Switch between single-line and multi-line forms of code
-  use 'AndrewRadev/splitjoin.vim'
-
-  -- Automatically generate tags
-  use 'ludovicchabant/vim-gutentags'
-
--- Statusline
-  -- use 'glepnir/galaxyline.nvim'
+  -- Statusline
   use {
-    'hoob3rt/lualine.nvim',
-    -- '~/src/github.com/jonathangin52/lualine.nvim'
+    'nvim-lualine/lualine.nvim',
     requires = 'kyazdani42/nvim-web-devicons',
+    config = [[require('config.lualine')]],
   }
 
-  -- Git signs
-  use 'mhinz/vim-signify'
+  -- Floating terminal
+  use {
+    'akinsho/toggleterm.nvim',
+    config = [[require('config.toggleterm')]],
+  }
 
-  -- Color
-  use 'norcalli/nvim-colorizer.lua'
-
-  -- Helper functions
-  use 'nvim-lua/plenary.nvim'
+  --[[ === Trial plugins === ]]
+  -- Colour
+  use {
+    'norcalli/nvim-colorizer.lua',
+    config = [[require('colorizer').setup()]],
+  }
 
   -- Session management
-  use 'rmagatti/auto-session'
+  use {
+    'rmagatti/auto-session',
+    config = function()
+      require("auto-session").setup {
+        log_level = "error",
+        auto_session_suppress_dirs = { "~/", "~/Downloads", "/"},
+        pre_save_cmds = {'tabdo NvimTreeClose'}
+      }
+    end
+  }
+
+  -- Telescope
+  use {
+    'nvim-telescope/telescope.nvim',
+    branch = '0.1.x',
+    requires = {'nvim-lua/popup.nvim', 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope-fzy-native.nvim'},
+  }
+  use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+
+  -- Test
+  use 'AndrewRadev/splitjoin.vim'
+  use {
+    'ggandor/lightspeed.nvim',
+    requires = 'tpope/vim-repeat',
+  }
+
+  use {
+    "folke/which-key.nvim",
+    config = [[require("which-key").setup {}]],
+  }
+
+  use {
+    'numToStr/Comment.nvim',
+    config = [[require('Comment').setup()]],
+  }
+  use {
+    'rcarriga/nvim-notify',
+    config = function()
+      vim.notify = require('notify')
+    end
+  }
+
+  -- Automatically set up your configuration after cloning packer.nvim
+  -- Put this at the end after all plugins
+  if packer_bootstrap then
+    require('packer').sync()
+  end
 end)

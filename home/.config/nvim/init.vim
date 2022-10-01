@@ -1,5 +1,4 @@
 set nocompatible
-source ~/.config/nvim/plugins.vim
 
 " Set leader key to <space>
 let mapleader="\<Space>"
@@ -157,70 +156,11 @@ nnoremap <silent><leader><leader> :nohlsearc<cr>
 " ===                           PLUGIN CONFIG                              === "
 " ============================================================================ "
 lua <<EOF
-require('devicons')
-require('treesitter')
-require('lsp')
-require('statusline')
-require('completion')
-vim.notify = require("notify")
-require('colorizer').setup()
-require('Comment').setup()
-require("which-key").setup{}
-require('gitsigns').setup {
-  on_attach = function(bufnr)
-    local gs = package.loaded.gitsigns
-
-    local function map(mode, l, r, opts)
-      opts = opts or {}
-      opts.buffer = bufnr
-      vim.keymap.set(mode, l, r, opts)
-    end
-
-    -- Navigation
-    map('n', ']c', function()
-      if vim.wo.diff then return ']c' end
-      vim.schedule(function() gs.next_hunk() end)
-      return '<Ignore>'
-    end, {expr=true})
-
-    map('n', '[c', function()
-      if vim.wo.diff then return '[c' end
-      vim.schedule(function() gs.prev_hunk() end)
-      return '<Ignore>'
-    end, {expr=true})
-
-    -- Actions
-    map({'n', 'v'}, '<leader>hs', ':Gitsigns stage_hunk<CR>')
-    map({'n', 'v'}, '<leader>hr', ':Gitsigns reset_hunk<CR>')
-    map('n', '<leader>hS', gs.stage_buffer)
-    map('n', '<leader>hu', gs.undo_stage_hunk)
-    map('n', '<leader>hR', gs.reset_buffer)
-    map('n', '<leader>hp', gs.preview_hunk)
-    map('n', '<leader>hb', function() gs.blame_line{full=true} end)
-    map('n', '<leader>tb', gs.toggle_current_line_blame)
-    map('n', '<leader>hd', gs.diffthis)
-    map('n', '<leader>hD', function() gs.diffthis('~') end)
-    map('n', '<leader>td', gs.toggle_deleted)
-
-    -- Text object
-    map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
-  end
-}
-require('auto-session').setup { pre_save_cmds = {'tabdo NvimTreeClose'} }
-require('telescope').setup { defaults = { file_ignore_patterns = {'rbi'} } }
-require('telescope').load_extension('fzf')
-require('indent_blankline').setup {
-  show_first_indent_level = false,
-  use_treesitter = true,
-  filetype_exclude = {'help'},
-  buftype_exclude = {'terminal'},
-  show_current_context = true,
-  context_char = '┃',
-}
+require("plugins")
 require('nvim-tree').setup {
-  filters = {
-    custom = {'.git', 'node_modules'},
-  },
+  -- filters = {
+  --   custom = {'.git', 'node_modules'},
+  -- },
   view = {width = 40},
 }
 require('onenord').setup({
@@ -267,32 +207,6 @@ nnoremap <silent><leader>9 <Cmd>BufferLineGoToBuffer 9<CR>
 " === vim-bookmarks === "
 let g:bookmark_auto_save = 1
 let g:bookmark_auto_close = 1
-
-
-" === bufferline === "
-lua <<EOF
-  require("bufferline").setup {
-    options = {
-      diagnostics = "nvim_lsp",
-      numbers = "ordinal",
-    },
-  }
-require("toggleterm").setup{
-  open_mapping = [[<c-h>]],
-}
-function _G.set_terminal_keymaps()
-  local opts = {buffer = 0}
-  vim.keymap.set('t', '<esc>', [[<C-\><C-h>]], opts)
-  vim.keymap.set('t', 'hh', [[<C-\><C-h>]], opts)
-  vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
-  vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
-  vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
-  vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
-end
-
--- if you only want these mappings for toggle term use term://*toggleterm#* instead
-vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
-EOF
 
 " === vim-matchup === "
 " Colour matching parenthesis

@@ -1,12 +1,6 @@
 local cmp = require('cmp')
 local luasnip = require('luasnip')
 local lspkind = require('lspkind')
-require("copilot_cmp").setup()
-
-vim.defer_fn(function()
-  require("copilot").setup()
-end, 100)
-
 
 -- Add lspkind symbol for copilot
 lspkind.init({
@@ -86,6 +80,8 @@ cmp.setup.cmdline(':', {
 cmp.setup.cmdline('/', {
   mapping = cmp.mapping.preset.cmdline(),
   sources = cmp.config.sources({
+    { name = 'nvim_lsp_document_symbol' }
+  }, {
     { name = 'buffer' }
   })
 })
