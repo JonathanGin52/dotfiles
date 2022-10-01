@@ -144,7 +144,7 @@ map <leader>s? z=
 
 " === Editing === "
 " Rename word under cursor
-nnoremap <leader>rn :%s/\<<C-r><C-w>\>//g<Left><Left>
+nnoremap <leader>sr :%s/\<<C-r><C-w>\>//g<Left><Left>
 " Repeat dot actions and macros on visual selection
 xnoremap . :norm.<CR>
 xnoremap @@ :norm! @@<CR>
