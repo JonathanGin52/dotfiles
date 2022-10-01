@@ -47,8 +47,9 @@ Plug 'stefandtw/quickfix-reflector.vim'
 Plug 'MattesGroeger/vim-bookmarks'
 
 " Snippets
-Plug 'hrsh7th/vim-vsnip'
-Plug 'hrsh7th/cmp-vsnip'
+Plug 'L3MON4D3/LuaSnip'
+Plug 'saadparwaiz1/cmp_luasnip'
+Plug 'rafamadriz/friendly-snippets'
 
 " LSP and auto-completion
 Plug 'neovim/nvim-lspconfig'

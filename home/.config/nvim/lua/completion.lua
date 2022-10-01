@@ -1,20 +1,20 @@
 local cmp = require('cmp')
-
--- lspkind.lua
-local lspkind = require("lspkind")
-lspkind.init({
-  symbol_map = {
-    Copilot = "",
-  },
-})
-
-vim.api.nvim_set_hl(0, "CmpItemKindCopilot", {fg ="#6CC644"})
+local luasnip = require('luasnip')
+local lspkind = require('lspkind')
+require("copilot_cmp").setup()
 
 vim.defer_fn(function()
   require("copilot").setup()
 end, 100)
 
-require("copilot_cmp").setup()
+
+-- Add lspkind symbol for copilot
+lspkind.init({
+  symbol_map = {
+    Copilot = "",
+  },
+})
+vim.api.nvim_set_hl(0, "CmpItemKindCopilot", {fg ="#6CC644"})
 
 
 local has_words_before = function()
@@ -23,10 +23,12 @@ local has_words_before = function()
   return col ~= 0 and vim.api.nvim_buf_get_text(0, line-1, 0, line-1, col, {})[1]:match("^%s*$") == nil
 end
 
+luasnip.filetype_extend("ruby", {"rails"})
+
 cmp.setup({
   snippet = {
     expand = function(args)
-      vim.fn["vsnip#anonymous"](args.body)
+      luasnip.lsp_expand(args.body)
     end,
   },
   mapping = cmp.mapping.preset.insert({
@@ -37,6 +39,8 @@ cmp.setup({
     ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() and has_words_before() then
         cmp.select_next_item()
+      elseif luasnip.expand_or_jumpable() then
+        luasnip.expand_or_jump()
       else
         fallback()
       end
@@ -44,6 +48,8 @@ cmp.setup({
     ['<S-Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
+      elseif luasnip.expand_or_jumpable(-1) then
+        luasnip.jump(-1)
       else
         fallback()
       end
@@ -57,7 +63,7 @@ cmp.setup({
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
     { name = 'copilot' },
-    { name = 'vsnip' },
+    { name = 'luasnip' },
     { name = 'nvim_lsp_signature_help' },
     { name = 'treesitter' },
     { name = 'buffer' }
