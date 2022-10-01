@@ -46,6 +46,10 @@ Plug 'stefandtw/quickfix-reflector.vim'
 " Vim bookmarks plugin
 Plug 'MattesGroeger/vim-bookmarks'
 
+" Snippets
+Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/cmp-vsnip'
+
 " LSP and auto-completion
 Plug 'neovim/nvim-lspconfig'
 Plug 'onsails/lspkind-nvim'
