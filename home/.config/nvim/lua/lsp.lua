@@ -1,5 +1,6 @@
 local nvim_lsp = require("lspconfig")
 local null_ls = require("null-ls")
+local notify = require("notify")
 
 null_ls.setup({
   sources = {
@@ -15,6 +16,8 @@ null_ls.setup({
 })
 
 local on_attach = function(client, bufnr)
+  notify(string.format("[lsp] %s\n[cwd] %s", client.name, vim.fn.getcwd()), "info", { title = "[lsp] Active" })
+
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 

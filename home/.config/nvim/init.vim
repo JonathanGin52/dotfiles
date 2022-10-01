@@ -162,9 +162,10 @@ require('treesitter')
 require('lsp')
 require('statusline')
 require('completion')
-require("which-key")
+vim.notify = require("notify")
 require('colorizer').setup()
 require('Comment').setup()
+require("which-key").setup{}
 require('gitsigns').setup {
   on_attach = function(bufnr)
     local gs = package.loaded.gitsigns

@@ -96,5 +96,6 @@ Plug 'ggandor/lightspeed.nvim'
 Plug 'tpope/vim-repeat'
 Plug 'folke/which-key.nvim'
 Plug 'numToStr/Comment.nvim'
+Plug 'rcarriga/nvim-notify'
 
 call plug#end()
