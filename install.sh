@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 exec > >(tee -i $HOME/dotfiles_install.log)
 exec 2>&1
@@ -38,6 +38,10 @@ echo 'export PATH="/workspaces/github/bin:$PATH' >> $HOME/.zshrc
 
 echo 'alias open="rdm open"' >> $HOME/.zshenv
 echo 'alias xdg-open="rdm open"' >> $HOME/.zshenv
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+curl -s https://raw.githubusercontent.com/alacritty/alacritty/master/extra/alacritty.info > /tmp/alacritty.info
+sudo tic -xe alacritty,alacritty-direct /tmp/alacritty.info
 
 sudo chsh -s "$(which zsh)" "$(whoami)"
-nvim +'PlugInstall --sync' +qa
+nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
