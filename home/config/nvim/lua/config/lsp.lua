@@ -2,10 +2,14 @@ local nvim_lsp = require("lspconfig")
 local null_ls = require("null-ls")
 local notify = require("notify")
 
+require("mason").setup()
+require("mason-lspconfig").setup()
+
 null_ls.setup({
   sources = {
     null_ls.builtins.formatting.erb_lint,
     null_ls.builtins.formatting.rubocop,
+    null_ls.builtins.formatting.stylua,
 
     null_ls.builtins.diagnostics.eslint,
 
@@ -13,46 +17,56 @@ null_ls.setup({
   },
 })
 
+-- Mappings.
+-- See `:help vim.diagnostic.*` for documentation on any of the below functions
+local opts = { noremap = true, silent = true }
+vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, opts)
+vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
+vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
+vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, opts)
+
 local on_attach = function(client, bufnr)
   notify(string.format("[lsp] %s\n[cwd] %s", client.name, vim.fn.getcwd()), "info", { title = "[lsp] Active" })
 
-  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-
-  buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
+  -- Enable completion triggered by <c-x><c-o>
+  vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
   -- Mappings.
-  local opts = { noremap=true, silent=true }
-  buf_set_keymap("n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-  buf_set_keymap("n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts)
-  buf_set_keymap("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
-  buf_set_keymap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-  buf_set_keymap("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
-  buf_set_keymap("n", "<space>D", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
-  buf_set_keymap("n", "<space>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-  buf_set_keymap("n", "<space>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-  buf_set_keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-  buf_set_keymap("n", "<space>e", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", opts)
-  buf_set_keymap("n", "[d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", opts)
-  buf_set_keymap("n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
-  buf_set_keymap("n", "<space>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
-
-  -- Set some keybinds conditional on server capabilities
-  if client.server_capabilities.document_formatting and client.name ~= "solargraph" then
-    buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
-  end
-  if client.server_capabilities.document_range_formatting then
-    buf_set_keymap("v", "<space>f", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
-  end
+  -- See `:help vim.lsp.*` for documentation on any of the below functions
+  local bufopts = { noremap = true, silent = true, buffer = bufnr }
+  vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
+  vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
+  vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
+  vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
+  vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, bufopts)
+  vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition, bufopts)
+  vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, bufopts)
+  vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, bufopts)
+  vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
+  vim.keymap.set("n", "<leader>f", function()
+    vim.lsp.buf.format({ async = true })
+  end, bufopts)
 end
 
--- Use a loop to conveniently both setup defined servers 
+-- Use a loop to conveniently both setup defined servers
 -- and map buffer local keybindings when the language server attaches
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
 local servers = { "null-ls", "solargraph", "sorbet", "tsserver", "gopls", "vimls", "pyright" }
 for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup {
+  nvim_lsp[lsp].setup({
     capabilities = capabilities,
     on_attach = on_attach,
-  }
+  })
 end
+
+nvim_lsp.sumneko_lua.setup({
+  capabilities = capabilities,
+  on_attach = on_attach,
+  settings = {
+    Lua = {
+      diagnostics = {
+        globals = { "vim" },
+      },
+    },
+  },
+})

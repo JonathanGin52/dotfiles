@@ -116,10 +116,14 @@ return require('packer').startup(function(use)
     config = [[require('config.cmp')]],
   }
 
-  use 'neovim/nvim-lspconfig'
-
-  use 'github/copilot.vim'
-  use {
+  use({
+    "williamboman/mason.nvim",
+    "williamboman/mason-lspconfig.nvim",
+  })
+  use({
+    "neovim/nvim-lspconfig",
+    config = [[require('config.lsp')]],
+  })
     "zbirenbaum/copilot.lua",
     event = {"VimEnter"},
     config = function()
