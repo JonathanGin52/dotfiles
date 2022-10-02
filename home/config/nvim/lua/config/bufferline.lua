@@ -1,10 +1,10 @@
-require("bufferline").setup {
+require("bufferline").setup({
   options = {
     mappings = true,
     diagnostics = "nvim_lsp",
     numbers = "ordinal",
   },
-}
+})
 
 local keymap = vim.keymap.set
 keymap("n", "<leader>1", ":lua require('bufferline').go_to_buffer(1, true)<cr>", { silent = true })

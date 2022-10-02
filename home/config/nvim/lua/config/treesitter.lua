@@ -1,4 +1,4 @@
-require("nvim-treesitter.configs").setup {
+require("nvim-treesitter.configs").setup({
   ensure_installed = "all",
   ignore_install = { "phpdoc" },
   highlight = {
@@ -14,20 +14,20 @@ require("nvim-treesitter.configs").setup {
       enable = false,
       keymaps = {
         -- Capture groups described in textobjects.scm
-        ['af'] = '@function.outer',
-        ['if'] = '@function.inner',
-        ['aC'] = '@class.outer',
-        ['iC'] = '@class.inner',
-        ['ac'] = '@conditional.outer',
-        ['ic'] = '@conditional.inner',
-        ['ae'] = '@block.outer',
-        ['ie'] = '@block.inner',
-        ['al'] = '@loop.outer',
-        ['il'] = '@loop.inner',
-        ['is'] = '@statement.inner',
-        ['as'] = '@statement.outer',
-        ['ad'] = '@comment.outer',
+        ["af"] = "@function.outer",
+        ["if"] = "@function.inner",
+        ["aC"] = "@class.outer",
+        ["iC"] = "@class.inner",
+        ["ac"] = "@conditional.outer",
+        ["ic"] = "@conditional.inner",
+        ["ae"] = "@block.outer",
+        ["ie"] = "@block.inner",
+        ["al"] = "@loop.outer",
+        ["il"] = "@loop.inner",
+        ["is"] = "@statement.inner",
+        ["as"] = "@statement.outer",
+        ["ad"] = "@comment.outer",
       },
     },
   },
-}
+})
