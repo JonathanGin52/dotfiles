@@ -3,15 +3,6 @@
 THISDIR=$(cd "$(dirname "$0")" || exit 1; pwd)
 tee < ~/.zshrc -a "${THISDIR}/zshrc"
 
-sudo apt-get update
-sudo apt-get install -y --no-install-recommends \
- zsh \
- tmux \
- jq \
- ripgrep \
- fd-find \
- fzf
-
 # Install rdm - https://github.com/BlakeWilliams/remote-development-manager
 if ! [ -x "$(command -v rdm)" ]; then
   wget https://github.com/BlakeWilliams/remote-development-manager/releases/latest/download/rdm-linux-amd64

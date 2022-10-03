@@ -32,3 +32,4 @@ else
 fi
 
 installScript "Neovim" nvim
+installScript "CLI Tools" cli-tools
