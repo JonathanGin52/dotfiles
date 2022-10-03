@@ -83,8 +83,8 @@ keymap("x", ".", ":norm.<cr>", { silent = true })
 keymap("x", "@@", ":norm!@@<cr>", { silent = true })
 
 -- Rename word under cursor
-keymap("n", "<leader>sr", ":%s/\\<<C-r><C-w>>//g<Left><Left>")
-keymap("n", "<leader>rn", ":%s/\\<<C-r><C-w>>//g<Left><Left>")
+keymap("n", "<leader>sr", ":%s/\\<<C-r><C-w>\\>//g<Left><Left>")
+keymap("n", "<leader>rn", ":%s/\\<<C-r><C-w>\\>//g<Left><Left>")
 
 -- === Spell Check ==="
 -- Pressing <leader>ss will toggle and untoggle spell checking
