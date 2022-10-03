@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 SCRIPT_ROOT=$(cd "$(dirname "$0")" || exit 1; pwd)
 if [ -d "$SCRIPT_ROOT/setup" ]; then
@@ -27,6 +27,8 @@ fi
 
 if [ "$OS" = "codespace" ]; then
   installScript "Codespaces" codespaces
+else
+  installScript "ZSH" zsh
 fi
 
 installScript "Neovim" nvim

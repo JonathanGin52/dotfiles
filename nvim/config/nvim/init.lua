@@ -146,8 +146,8 @@ keymap("n", "<leader>b", ":Telescope buffers<cr>", { silent = true })
 -- " === nvim-bufferline === "
 -- " These commands will navigate through buffers in order regardless of which mode you are using
 -- " e.g. if you change the order of buffers :bnext and :bprevious will not respect the custom ordering
-keymap("n", "<leader>[b", ":BufferLineCyclePrev<cr>", { silent = true })
-keymap("n", "<leader>]b", ":BufferLineCycleNext<cr>", { silent = true })
+keymap("n", "[b", ":BufferLineCyclePrev<cr>", { silent = true })
+keymap("n", "]b", ":BufferLineCycleNext<cr>", { silent = true })
 keymap("n", "<leader>bd", ":BufferLinePickClose<cr>", { silent = true })
 
 -- === nvim-tree === "
