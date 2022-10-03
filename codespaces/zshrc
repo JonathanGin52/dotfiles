@@ -1,0 +1,10 @@
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+export PATH="/workspaces/github/bin:$PATH"
+export TERM=xterm-256color
+
+alias vim=nvim
+alias pbcopy="rdm copy"
+alias pbpaste="rdm paste"
+alias open="rdm open"
+alias xdg-open="rdm open"
