@@ -1,6 +1,7 @@
 brew "bat"
 brew "fd"
 brew "fzf"
+brew "git-delta"
 brew "jq"
 brew "neovim"
 brew "ripgrep"
