@@ -27,6 +27,10 @@ return require("packer").startup(function(use)
 
   -- UI Elements
   use({
+    "kyazdani42/nvim-web-devicons",
+    config = [[require('config.devicons')]],
+  })
+  use({
     "akinsho/nvim-bufferline.lua",
     requires = "kyazdani42/nvim-web-devicons",
     config = [[require('config.bufferline')]],
@@ -67,11 +71,6 @@ return require("packer").startup(function(use)
   use({
     "lukas-reineke/indent-blankline.nvim",
     config = [[require('config.indent_blankline')]],
-  })
-
-  use({
-    "kyazdani42/nvim-web-devicons",
-    config = [[require('config.devicons')]],
   })
 
   -- Git utilities
@@ -201,7 +200,7 @@ return require("packer").startup(function(use)
 
   use({
     "folke/which-key.nvim",
-    config = [[require("which-key").setup {}]],
+    config = [[require('config.which_key')]],
   })
 
   use({
