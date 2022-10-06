@@ -99,6 +99,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 
 -- " === Misc. === "
 keymap("n", "<leader><leader>", ":nohlsearc<cr>", { silent = true }) -- Quickly turn off highlighting for a search
+keymap("n", "<leader>*", ":grep <C-r><C-w><cr>:cope<cr>", { silent = true }) -- Search codebase for word under cursor
 
 -- === Yank and Paste ===
 -- Yank to system clipboard --
