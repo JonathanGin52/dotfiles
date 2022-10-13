@@ -1,8 +1,5 @@
 #!/usr/bin/env sh
 
-THISDIR=$(cd "$(dirname "$0")" || exit 1; pwd)
-tee < ~/.zshrc -a "${THISDIR}/zshrc"
-
 # Install rdm - https://github.com/BlakeWilliams/remote-development-manager
 if ! [ -x "$(command -v rdm)" ]; then
   wget https://github.com/BlakeWilliams/remote-development-manager/releases/latest/download/rdm-linux-amd64
@@ -13,15 +10,18 @@ fi
 if ! grep -qF "IDEMPOTENCY TOKEN" ~/.zshrc; then
   {
     echo "# IDEMPOTENCY TOKEN"
+    echo 'plugins+=(z)'
     # shellcheck disable=2016
     echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"'
+    # shellcheck disable=2016
+    echo 'export PATH="/workspaces/github/bin:$PATH"'
     echo 'export TERM=xterm-256color'
     echo 'alias vim=nvim'
     echo 'alias pbcopy="rdm copy"'
     echo 'alias pbpaste="rdm paste"'
     echo 'alias open="rdm open"'
     echo 'alias xdg-open="rdm open"'
-  } >> ~/.zshrc
+  } >> "$HOME/.zshrc"
 fi
 
 sudo chsh -s "$(which zsh)" "$(whoami)"

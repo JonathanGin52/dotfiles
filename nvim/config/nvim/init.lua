@@ -13,7 +13,7 @@ set.splitright = true
 
 set.ignorecase = true
 set.smartcase = true
-set.cursorline = true
+set.wildignorecase = true
 
 set.scrolloff = 5
 set.undofile = true -- Enable persistent undo
@@ -21,16 +21,16 @@ set.swapfile = false -- Disable swap files
 
 set.lazyredraw = true -- Don't redraw while executing macros
 
+-- Tabs settings
 set.tabstop = 2
 set.softtabstop = 2
 set.shiftwidth = 2
 
 set.termguicolors = true
+set.cursorline = true
 set.updatetime = 800 -- Reduce time before CursorHold event fires
 set.completeopt = "menu,menuone,noselect" -- Set completeopt to have a better completion experience
 set.shortmess:append({ c = true }) -- Avoid showing message extra message when using completion
-
-set.wildignorecase = true
 
 -- Mouse
 set.mouse = "n" -- Enable mouse support
@@ -51,10 +51,10 @@ end
 -- Remap keys
 -- Use hh to escape
 keymap({ "i", "x" }, "hh", "<esc>")
+keymap("i", "hH", "<esc>")
 keymap("t", "<esc>", "<C-\\><C-n>")
 keymap("t", "hh", "<C-\\><C-n>")
 keymap("c", "hh", "<C-c>")
-keymap("i", "hH", "<esc>")
 
 -- Quickfix and location list navigation
 keymap("n", "[q", ":cprev<cr>", { silent = true })
@@ -66,13 +66,13 @@ keymap("n", "]l", ":lnext<cr>", { silent = true })
 keymap("n", "[L", ":lfirst<cr>", { silent = true })
 keymap("n", "]L", ":llast<cr>", { silent = true })
 
--- " === Splits === "
+-- === Splits === "
 -- Navigate between splits using <leader>[hjkl]
 keymap("n", "<leader>h", "<C-w>h")
 keymap("n", "<leader>j", "<C-w>j")
 keymap("n", "<leader>k", "<C-w>k")
 keymap("n", "<leader>l", "<C-w>l")
-keymap("n", "<leader>=", "<C-w>=") -- Normalize all split sizes
+keymap("n", "<leader>=", "<C-w>=") -- Equalize all split sizes
 
 -- Create splits with <leader>[-|] (they look like the split they create)
 keymap("n", "<leader>|", ":vsplit<cr>", { silent = true })
@@ -97,7 +97,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   group = vim.api.nvim_create_augroup("YankHighlight", { clear = true }),
 })
 
--- " === Misc. === "
+-- === Misc. === --
 keymap("n", "<leader><leader>", ":nohlsearc<cr>", { silent = true }) -- Quickly turn off highlighting for a search
 keymap("n", "<leader>*", ":grep <C-r><C-w><cr>:cope<cr>", { silent = true }) -- Search codebase for word under cursor
 
@@ -109,6 +109,8 @@ keymap("n", "<leader>Y", '"+y$')
 -- Paste from system clipboard
 keymap({ "n", "v" }, "<leader>p", '"+p')
 keymap("n", "<leader>P", '"+P')
+
+-- Use rdm in codespaces
 if os.getenv("CODESPACES") then
   vim.g.clipboard = {
     name = "rdm",
@@ -130,36 +132,33 @@ require("nvim-tree").setup({
   view = { width = 40 },
 })
 require("onenord").setup({
-  styles = {
-    comments = "italic",
-  },
+  styles = { comments = "italic" },
 })
 vim.cmd([[colorscheme onenord]])
 
--- " === vim-fugitive === "
+-- === vim-fugitive === --
 keymap("n", "<leader>g", ":Git<cr>", { silent = true })
 
--- " === Telescope === "
+-- === Telescope === --
 keymap("n", "<leader>t", ":Telescope find_files<cr>", { silent = true })
 keymap("n", "<leader>gr", ":Telescope live_grep<cr>", { silent = true })
 keymap("n", "<leader>b", ":Telescope buffers<cr>", { silent = true })
 
--- " === nvim-bufferline === "
--- " These commands will navigate through buffers in order regardless of which mode you are using
--- " e.g. if you change the order of buffers :bnext and :bprevious will not respect the custom ordering
+-- === nvim-bufferline === --
+-- These commands will navigate through buffers in order regardless of which mode you are using
+-- e.g. if you change the order of buffers :bnext and :bprevious will not respect the custom ordering
 keymap("n", "[b", ":BufferLineCyclePrev<cr>", { silent = true })
 keymap("n", "]b", ":BufferLineCycleNext<cr>", { silent = true })
 keymap("n", "<leader>bd", ":BufferLinePickClose<cr>", { silent = true })
 
--- === nvim-tree === "
+-- === nvim-tree === --
 keymap("n", "<C-n>", ":NvimTreeFindFile<cr>", { silent = true })
 keymap("n", "<leader>n", ":NvimTreeToggle<cr>", { silent = true })
 
--- " === vim-matchup === "
--- " Colour matching parenthesis
-vim.cmd([[highlight MatchParen ctermfg=red ctermbg=NONE guifg='#B48EAD' guibg=NONE]])
+-- === vim-matchup === --
+vim.cmd([[highlight MatchParen ctermfg=red ctermbg=NONE guifg='#B48EAD' guibg=NONE]]) -- Colour matching parenthesis
 
--- " === vim-bookmarks === "
+-- === vim-bookmarks === --
 vim.g.bookmark_sign = ""
 vim.g.bookmark_auto_close = 1
 vim.g.bookmark_auto_save = 1

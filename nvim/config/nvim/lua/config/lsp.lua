@@ -12,6 +12,7 @@ null_ls.setup({
     null_ls.builtins.formatting.stylua,
 
     null_ls.builtins.diagnostics.eslint,
+    null_ls.builtins.diagnostics.shellcheck,
 
     null_ls.builtins.completion.spell,
   },
@@ -51,7 +52,7 @@ end
 -- Use a loop to conveniently both setup defined servers
 -- and map buffer local keybindings when the language server attaches
 local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
-local servers = { "null-ls", "solargraph", "sorbet", "tsserver", "gopls", "vimls", "pyright" }
+local servers = { "null-ls", "solargraph", "sorbet", "tsserver", "gopls", "vimls", "pyright", "bashls" }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup({
     capabilities = capabilities,
