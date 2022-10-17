@@ -1,0 +1,34 @@
+[user]
+  name = Jonathan Gin
+  email = jonathangin52@github.com
+[core]
+  editor = nvim
+  excludesfile = ~/.gitignore_global
+  commitGraph = true
+  pager = delta
+[alias]
+  hist = log --graph --pretty='''%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset''' --all
+  cleanup = "!git branch --merged | rg  -v '\\*\\|master\\|main' | xargs -n 1 git branch -d"
+  pushf = push --force-with-lease
+[diff]
+  algorithm = patience
+  colorMoved = default
+[delta]
+  navigate = true    # use n and N to move between diff sections
+  side-by-side = true # show side-by-side diffs
+[protocol]
+  version = 2
+[gc]
+  writeCommitGraph = true
+[color]
+	ui = true
+[interactive]
+  diffFilter = delta --color-only
+[add.interactive]
+  useBuiltin = false # required for git 2.37.0
+[merge]
+  conflictstyle = diff3
+[pull]
+  ff = only
+[push]
+  autoSetupRemote = true
