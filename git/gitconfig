@@ -5,7 +5,7 @@
   editor = nvim
   excludesfile = ~/.gitignore_global
   commitGraph = true
-  pager = delta
+  pager = delta --diff-so-fancy
 [alias]
   hist = log --graph --pretty='''%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset''' --all
   cleanup = "!git branch --merged | rg  -v '\\*\\|master\\|main' | xargs -n 1 git branch -d"
@@ -13,15 +13,12 @@
 [diff]
   algorithm = patience
   colorMoved = default
-[delta]
-  navigate = true    # use n and N to move between diff sections
-  side-by-side = true # show side-by-side diffs
 [protocol]
   version = 2
 [gc]
   writeCommitGraph = true
 [color]
-	ui = true
+  ui = true
 [interactive]
   diffFilter = delta --color-only
 [add.interactive]
@@ -32,3 +29,13 @@
   ff = only
 [push]
   autoSetupRemote = true
+
+[delta]
+  navigate = true    # use n and N to move between diff sections
+  side-by-side = true # show side-by-side diffs
+  syntax-theme = Nord
+  file-added-label = [+]
+  file-copied-label = [==]
+  file-modified-label = [*]
+  file-removed-label = [-]
+  file-renamed-label = [->]
