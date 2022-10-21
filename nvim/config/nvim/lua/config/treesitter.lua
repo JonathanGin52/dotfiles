@@ -3,15 +3,13 @@ require("nvim-treesitter.configs").setup({
   ignore_install = { "phpdoc" },
   highlight = {
     enable = true,
-    additional_vim_regex_highlighting = true,
   },
   matchup = {
     enable = true,
   },
   textobjects = {
     select = {
-      -- disabling until Ruby support is added. Using vim-textobj-rubyblock for now
-      enable = false,
+      enable = true,
       keymaps = {
         -- Capture groups described in textobjects.scm
         ["af"] = "@function.outer",
@@ -20,8 +18,8 @@ require("nvim-treesitter.configs").setup({
         ["iC"] = "@class.inner",
         ["ac"] = "@conditional.outer",
         ["ic"] = "@conditional.inner",
-        ["ae"] = "@block.outer",
-        ["ie"] = "@block.inner",
+        ["ae"] = "@block.outer", -- Currently relying on vim-textobj-rubyblock for block support in Ruby
+        ["ie"] = "@block.inner", -- Currently relying on vim-textobj-rubyblock for block support in Ruby
         ["al"] = "@loop.outer",
         ["il"] = "@loop.inner",
         ["is"] = "@statement.inner",
@@ -29,5 +27,14 @@ require("nvim-treesitter.configs").setup({
         ["ad"] = "@comment.outer",
       },
     },
+    swap = {
+      enable = true,
+      swap_next = {
+        ["<leader>a"] = "@parameter.inner",
+      },
+      swap_previous = {
+        ["<leader>A"] = "@parameter.inner",
+      },
+    }
   },
 })
