@@ -47,13 +47,6 @@ return require("packer").startup(function(use)
     requires = "kyazdani42/nvim-web-devicons",
   })
 
-  use({
-    "rcarriga/nvim-notify",
-    config = function()
-      vim.notify = require("notify")
-    end,
-  })
-
   -- Treesitter
   use({
     "nvim-treesitter/nvim-treesitter",
@@ -206,6 +199,17 @@ return require("packer").startup(function(use)
   use({
     "numToStr/Comment.nvim",
     config = [[require('Comment').setup()]],
+  })
+
+  use({
+    "folke/noice.nvim",
+    config = function()
+      require("noice").setup()
+    end,
+    requires = {
+      "MunifTanjim/nui.nvim",
+      "rcarriga/nvim-notify",
+    }
   })
 
   -- Automatically set up your configuration after cloning packer.nvim
