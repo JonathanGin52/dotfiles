@@ -19,7 +19,7 @@ set.scrolloff = 5
 set.undofile = true -- Enable persistent undo
 set.swapfile = false -- Disable swap files
 
-set.lazyredraw = true -- Don't redraw while executing macros
+-- set.lazyredraw = true -- Don't redraw while executing macros
 
 -- Tabs settings
 set.tabstop = 2
@@ -140,9 +140,10 @@ vim.cmd([[colorscheme onenord]])
 keymap("n", "<leader>g", ":Git<cr>", { silent = true })
 
 -- === Telescope === --
-keymap("n", "<leader>t", ":Telescope find_files<cr>", { silent = true })
-keymap("n", "<leader>gr", ":Telescope live_grep<cr>", { silent = true })
-keymap("n", "<leader>b", ":Telescope buffers<cr>", { silent = true })
+local telescope = require("telescope.builtin")
+keymap("n", "<leader>t", telescope.find_files, { silent = true })
+keymap("n", "<leader>gr", telescope.live_grep, { silent = true })
+keymap("n", "<leader>b", telescope.buffers, { silent = true })
 
 -- === nvim-bufferline === --
 -- These commands will navigate through buffers in order regardless of which mode you are using
