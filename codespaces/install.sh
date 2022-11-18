@@ -14,7 +14,6 @@ if ! grep -qF "IDEMPOTENCY TOKEN" ~/.zshrc; then
     # shellcheck disable=2016
     echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"'
     # shellcheck disable=2016
-    echo 'export PATH="/workspaces/github/bin:$PATH"'
     echo 'export TERM=xterm-256color'
     echo 'alias vim=nvim'
     echo 'alias pbcopy="rdm copy"'
