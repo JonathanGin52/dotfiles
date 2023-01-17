@@ -12,7 +12,7 @@ if ! grep -qF "IDEMPOTENCY TOKEN" ~/.zshrc; then
     echo "# IDEMPOTENCY TOKEN"
     echo 'plugins+=(z)'
     # shellcheck disable=2016
-    echo 'export PATH="/workspaces/github/bin:$PATH"'
+    echo 'export PATH="$PATH:/workspaces/github/bin"'
     # shellcheck disable=2016
     echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"'
     # shellcheck disable=2016
