@@ -118,14 +118,15 @@ return require("packer").startup(function(use)
     config = [[require('config.lsp')]],
   })
 
-  use("github/copilot.vim")
   use({
     "zbirenbaum/copilot.lua",
-    event = { "VimEnter" },
+    cmd = "Copilot",
+    event = "InsertEnter",
     config = function()
-      vim.defer_fn(function()
-        require("copilot").setup()
-      end, 100)
+      require("copilot").setup({
+        suggestion = { enabled = false },
+        panel = { enabled = false },
+      })
     end,
   })
   use({
@@ -192,6 +193,15 @@ return require("packer").startup(function(use)
   })
 
   use({
+    "Wansmer/treesj",
+    requires = { "nvim-treesitter" },
+    config = function()
+      require("treesj").setup({ --[[ your config ]]
+      })
+    end,
+  })
+
+  use({
     "folke/which-key.nvim",
     config = [[require('config.which_key')]],
   })
@@ -209,7 +219,7 @@ return require("packer").startup(function(use)
     requires = {
       "MunifTanjim/nui.nvim",
       "rcarriga/nvim-notify",
-    }
+    },
   })
 
   -- Automatically set up your configuration after cloning packer.nvim
