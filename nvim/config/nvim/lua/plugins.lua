@@ -63,7 +63,7 @@ return require("packer").startup(function(use)
   -- Show indentation levels
   use({
     "lukas-reineke/indent-blankline.nvim",
-    config = [[require('config.indent_blankline')]],
+    config = [[require('ibl').setup()]],
   })
 
   -- Git utilities
@@ -192,14 +192,14 @@ return require("packer").startup(function(use)
     requires = "tpope/vim-repeat",
   })
 
-  use({
-    "Wansmer/treesj",
-    requires = { "nvim-treesitter" },
-    config = function()
-      require("treesj").setup({ --[[ your config ]]
-      })
-    end,
-  })
+  -- use({
+  --   "Wansmer/treesj",
+  --   requires = { "nvim-treesitter" },
+  --   config = function()
+  --     require("treesj").setup({ --[[ your config ]]
+  --     })
+  --   end,
+  -- })
 
   use({
     "folke/which-key.nvim",
