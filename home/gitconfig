@@ -1,11 +1,11 @@
 [user]
-  name = Jonathan Gin
-  email = jonathangin52@github.com
+	name = Jonathan Gin
+	email = jonathangin52@github.com
 [core]
-  editor = nvim
-  excludesfile = /Users/jonathangin/.gitignore_global
-	commitGraph = true
-	pager = diff-so-fancy | less --tabs=4 -RFX
+	editor = nvim
+  excludesfile = ~/.gitignore_global
+  commitGraph = true
+  pager = delta --diff-so-fancy
 [alias]
   hist = log --graph --pretty='''%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset''' --all
   cleanup = "!git branch --merged | rg  -v '\\*\\|master\\|main' | xargs -n 1 git branch -d"
@@ -14,12 +14,26 @@
   dsf = "!git status -s | fzf --no-sort --reverse --preview 'git diff --color=always {+2} | diff-so-fancy' --bind=ctrl-j:preview-down --bind=ctrl-k:preview-up --preview-window=right:60%:wrap"
 [diff]
   algorithm = patience
+  colorMoved = default
+[delta]
+  navigate = true    # use n and N to move between diff sections
+  side-by-side = true # show side-by-side diffs
 [protocol]
   version = 2
 [gc]
-	writeCommitGraph = true
+  writeCommitGraph = true
 [color]
 	ui = true
+[interactive]
+  diffFilter = delta --color-only
+[add.interactive]
+  useBuiltin = false # required for git 2.37.0
+[merge]
+  conflictstyle = diff3
+[pull]
+  ff = only
+[push]
+  autoSetupRemote = true
 [color "diff-highlight"]
 	oldNormal = red bold
 	oldHighlight = red bold 52
@@ -28,13 +42,10 @@
 [color "diff"]
 	meta = 11
 	frag = magenta bold
+	func = 146 bold
 	commit = yellow bold
 	old = red bold
 	new = green bold
 	whitespace = red reverse
-[diff-so-fancy]
-	markEmptyLines = false
-[pull]
-	ff = only
-[push]
-	autoSetupRemote = true
+[init]
+	defaultBranch = main
