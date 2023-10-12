@@ -81,7 +81,14 @@ return require("packer").startup(function(use)
   use("stefandtw/quickfix-reflector.vim")
 
   -- Vim bookmarks plugin
-  use("MattesGroeger/vim-bookmarks")
+  use {
+    'tomasky/bookmarks.nvim',
+    after = "telescope.nvim",
+    event = "VimEnter",
+    config = function()
+      require('bookmarks').setup()
+    end
+  }
 
   -- LSP and auto-completion
   -- Snippets
