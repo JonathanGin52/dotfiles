@@ -11,8 +11,8 @@ telescope.setup({
   },
 })
 
-keymap("n", "<leader>t", builtins.find_files, { silent = true })
-keymap("n", "<leader>gr", builtins.live_grep, { silent = true })
+keymap("n", "<leader>t", "<Cmd>Telescope<CR>", { silent = true })
+keymap("n", "<leader>ff", builtins.find_files, { silent = true })
+keymap("n", "<leader>fg", builtins.live_grep, { silent = true })
 keymap("n", "<leader>b", builtins.buffers, { silent = true })
-keymap("n", "<C-s>", require("auto-session.session-lens").search_session, { silent = true, noremap = true })
 keymap("n", "<leader>fb", "<Cmd>Telescope bookmarks list<CR>", { silent = true, noremap = true })
