@@ -36,6 +36,9 @@ set.shortmess:append({ c = true }) -- Avoid showing message extra message when u
 set.mouse = "n" -- Enable mouse support
 keymap("n", "<LeftDrag>", "<LeftMouse>") -- Prevent mouse drag from visually selecting lines
 
+-- Session management
+vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+
 -- Make these commonly mistyped commands still work
 vim.api.nvim_create_user_command("W", "w", {})
 vim.api.nvim_create_user_command("Wq", "wq", {})
@@ -139,12 +142,6 @@ vim.cmd([[colorscheme onenord]])
 -- === vim-fugitive === --
 keymap("n", "<leader>g", ":Git<cr>", { silent = true })
 
--- === Telescope === --
-local telescope = require("telescope.builtin")
-keymap("n", "<leader>t", telescope.find_files, { silent = true })
-keymap("n", "<leader>gr", telescope.live_grep, { silent = true })
-keymap("n", "<leader>b", telescope.buffers, { silent = true })
-
 -- === nvim-bufferline === --
 -- These commands will navigate through buffers in order regardless of which mode you are using
 -- e.g. if you change the order of buffers :bnext and :bprevious will not respect the custom ordering
@@ -158,8 +155,3 @@ keymap("n", "<leader>n", ":NvimTreeToggle<cr>", { silent = true })
 
 -- === vim-matchup === --
 vim.cmd([[highlight MatchParen ctermfg=red ctermbg=NONE guifg='#B48EAD' guibg=NONE]]) -- Colour matching parenthesis
-
--- === vim-bookmarks === --
-vim.g.bookmark_sign = ""
-vim.g.bookmark_auto_close = 1
-vim.g.bookmark_auto_save = 1
