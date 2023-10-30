@@ -212,7 +212,8 @@ return require("packer").startup(function(use)
   -- Test
   -- use 'AndrewRadev/splitjoin.vim'
   use({
-    "ggandor/lightspeed.nvim",
+    "ggandor/leap.nvim",
+    config = [[require('leap').add_default_mappings()]],
     requires = "tpope/vim-repeat",
   })
 
