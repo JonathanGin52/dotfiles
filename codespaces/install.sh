@@ -26,3 +26,10 @@ if ! grep -qF "IDEMPOTENCY TOKEN" ~/.zshrc; then
 fi
 
 sudo chsh -s "$(which zsh)" "$(whoami)"
+
+# Install NeoVim
+# Fuse is a dependency to extract appimage
+sudo apt-get install -y fuse
+curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
+chmod u+x nvim.appimage
+sudo mv nvim.appimage /usr/bin/nvim
