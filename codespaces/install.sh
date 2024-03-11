@@ -14,14 +14,13 @@ if ! grep -qF "IDEMPOTENCY TOKEN" ~/.zshrc; then
     # shellcheck disable=2016
     echo 'export PATH="$PATH:/workspaces/github/bin"'
     # shellcheck disable=2016
-    echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"'
-    # shellcheck disable=2016
     echo 'export TERM=xterm-256color'
     echo 'alias vim=nvim'
     echo 'alias pbcopy="rdm copy"'
     echo 'alias pbpaste="rdm paste"'
     echo 'alias open="rdm open"'
     echo 'alias xdg-open="rdm open"'
+    echo 'source /usr/share/doc/fzf/examples/key-bindings.zsh'
   } >> "$HOME/.zshrc"
 fi
 
