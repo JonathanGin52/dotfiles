@@ -27,10 +27,8 @@ fi
 sudo chsh -s "$(which zsh)" "$(whoami)"
 
 # Install NeoVim
+# Fuse is a dependency to extract appimage
+sudo apt-get install -y fuse
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
-./nvim.appimage --appimage-extract
-./squashfs-root/AppRun --version
-
-# Optional: exposing nvim globally.
-mv squashfs-root /
-ln -s /squashfs-root/AppRun /usr/bin/nvim
+chmod u+x nvim.appimage
+sudo mv nvim.appimage /usr/bin/nvim
