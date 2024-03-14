@@ -1,22 +1,16 @@
 local nvim_lsp = require("lspconfig")
-local null_ls = require("null-ls")
 local notify = require("notify")
 
-require("mason").setup()
-require("mason-lspconfig").setup()
-
-null_ls.setup({
-  sources = {
-    null_ls.builtins.formatting.erb_lint,
-    null_ls.builtins.formatting.rubocop,
-    null_ls.builtins.formatting.stylua,
-
-    null_ls.builtins.diagnostics.eslint,
-    null_ls.builtins.diagnostics.shellcheck,
-
-    null_ls.builtins.completion.spell,
+require("mason").setup({
+  ui = {
+    icons = {
+      package_installed = "✓",
+      package_pending = "➜",
+      package_uninstalled = "✗",
+    },
   },
 })
+require("mason-lspconfig").setup()
 
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions

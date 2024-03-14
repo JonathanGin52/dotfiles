@@ -163,8 +163,8 @@ return require("packer").startup(function(use)
   })
 
   use({
-    "nvimtools/none-ls.nvim",
-    requires = "nvim-lua/plenary.nvim",
+    "stevearc/conform.nvim",
+    config = [[require('config.conform')]],
   })
 
   -- User defined text objects
