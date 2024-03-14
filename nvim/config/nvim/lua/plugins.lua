@@ -156,6 +156,13 @@ return require("packer").startup(function(use)
   })
 
   use({
+    "CopilotC-Nvim/CopilotChat.nvim",
+    branch = "canary",
+    requires = { "zbirenbaum/copilot.lua", "nvim-lua/plenary.nvim" },
+    config = [[require("CopilotChat").setup()]]
+  })
+
+  use({
     "nvimtools/none-ls.nvim",
     requires = "nvim-lua/plenary.nvim",
   })
