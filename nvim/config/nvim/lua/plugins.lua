@@ -167,6 +167,11 @@ return require("packer").startup(function(use)
     config = [[require('config.conform')]],
   })
 
+  use({
+    "mfussenegger/nvim-lint",
+    config = [[require('config.lint')]],
+  })
+
   -- User defined text objects
   use({
     "nelstrom/vim-textobj-rubyblock",
