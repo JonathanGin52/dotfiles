@@ -274,6 +274,31 @@ return require("packer").startup(function(use)
     },
   })
 
+  -- Obsidian
+  use({
+    "epwalsh/obsidian.nvim",
+    tag = "*", -- Use the latest release, instead of the latest commit
+    requires = {
+      "nvim-lua/plenary.nvim",
+      "hrsh7th/nvim-cmp",
+    },
+    ft = "markdown",
+    config = function()
+      require("obsidian").setup({
+        workspaces = {
+          {
+            name = "Leetcode",
+            path = "~/Documents/Leetcode",
+          },
+        },
+        disable_frontmatter = true,
+        templates = {
+          subdir = "templates",
+        },
+      })
+    end,
+  })
+
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if packer_bootstrap then
