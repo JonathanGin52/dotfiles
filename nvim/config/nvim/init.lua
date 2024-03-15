@@ -37,7 +37,7 @@ set.mouse = "n" -- Enable mouse support
 keymap("n", "<LeftDrag>", "<LeftMouse>") -- Prevent mouse drag from visually selecting lines
 
 -- Session management
-vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
 -- Make these commonly mistyped commands still work
 vim.api.nvim_create_user_command("W", "w", {})

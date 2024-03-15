@@ -25,11 +25,11 @@ return require("packer").startup(function(use)
   -- Colour theme
   use({
     "rmehri01/onenord.nvim",
-    config = function ()
+    config = function()
       require("onenord").setup({
         styles = { comments = "italic" },
       })
-    end
+    end,
   })
 
   -- UI Elements
@@ -102,10 +102,10 @@ return require("packer").startup(function(use)
     "L3MON4D3/LuaSnip",
     requires = "rafamadriz/friendly-snippets",
     config = function()
-       -- for friendly snippets
+      -- for friendly snippets
       require("luasnip.loaders.from_vscode").lazy_load()
       -- for custom snippets
-      require("luasnip.loaders.from_vscode").lazy_load({paths = "./snippets"})
+      require("luasnip.loaders.from_vscode").lazy_load({ paths = "./snippets" })
     end,
   })
 
@@ -128,7 +128,6 @@ return require("packer").startup(function(use)
   use({
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
-    cmd = {"Mason"},
   })
 
   use({
@@ -159,7 +158,7 @@ return require("packer").startup(function(use)
     "CopilotC-Nvim/CopilotChat.nvim",
     branch = "canary",
     requires = { "zbirenbaum/copilot.lua", "nvim-lua/plenary.nvim" },
-    config = [[require("CopilotChat").setup()]]
+    config = [[require("CopilotChat").setup()]],
   })
 
   use({
@@ -206,31 +205,31 @@ return require("packer").startup(function(use)
   })
 
   -- Vim bookmarks plugin
-  use {
-    'tomasky/bookmarks.nvim',
+  use({
+    "tomasky/bookmarks.nvim",
     config = function()
-      require('bookmarks').setup {
-        sign_priority = 8,  --set bookmark sign priority to cover other signs
-        save_file = vim.fn.expand "$HOME/.bookmarks", -- bookmarks save file path
-        keywords =  {
+      require("bookmarks").setup({
+        sign_priority = 8, --set bookmark sign priority to cover other signs
+        save_file = vim.fn.expand("$HOME/.bookmarks"), -- bookmarks save file path
+        keywords = {
           ["@t"] = " ", -- mark annotation startswith @t ,signs this icon as `Todo`
           ["@w"] = " ", -- mark annotation startswith @w ,signs this icon as `Warn`
           ["@f"] = " ", -- mark annotation startswith @f ,signs this icon as `Fix`
           ["@n"] = " ", -- mark annotation startswith @n ,signs this icon as `Note`
         },
         on_attach = function(bufnr)
-          local bm = require "bookmarks"
+          local bm = require("bookmarks")
           local map = vim.keymap.set
-          map("n","mm",bm.bookmark_toggle) -- add or remove bookmark at current line
-          map("n","mi",bm.bookmark_ann) -- add or edit mark annotation at current line
-          map("n","mc",bm.bookmark_clean) -- clean all marks in local buffer
-          map("n","mn",bm.bookmark_next) -- jump to next mark in local buffer
-          map("n","mp",bm.bookmark_prev) -- jump to previous mark in local buffer
-          map("n","ml",bm.bookmark_list) -- show marked file list in quickfix window
-        end
-      }
-    end
-  }
+          map("n", "mm", bm.bookmark_toggle) -- add or remove bookmark at current line
+          map("n", "mi", bm.bookmark_ann) -- add or edit mark annotation at current line
+          map("n", "mc", bm.bookmark_clean) -- clean all marks in local buffer
+          map("n", "mn", bm.bookmark_next) -- jump to next mark in local buffer
+          map("n", "mp", bm.bookmark_prev) -- jump to previous mark in local buffer
+          map("n", "ml", bm.bookmark_list) -- show marked file list in quickfix window
+        end,
+      })
+    end,
+  })
 
   -- Telescope
   use({
