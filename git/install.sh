@@ -22,10 +22,16 @@ fi
 
 GITEDITOR="$(git config --global core.editor)"
 GITNAME="$(git config --global user.name)"
+GITEMAIL="$(git config --global user.email)"
 THISDIR=$(cd "$(dirname "$0")" || exit 1; pwd)
 GITCONFIG="$THISDIR/gitconfig"
 
-mkdir -p ~/.config/git
 git config --global core.editor "${GITEDITOR:-nvim}"
 git config --global user.name "${GITNAME:-Jonathan Gin}"
+if [ -z "$GITEMAIL" ]; then
+  echo "No email address is set for Git."
+  echo "Please enter your email address: "
+  read -r GITEMAIL
+  git config --global user.email "$GITEMAIL"
+fi
 git config --global include.path "$GITCONFIG"
