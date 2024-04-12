@@ -10,12 +10,10 @@ fi
 
 GITEDITOR="$(git config --global core.editor)"
 GITNAME="$(git config --global user.name)"
-GITEMAIL="$(git config --global user.email)"
 THISDIR=$(cd "$(dirname "$0")" || exit 1; pwd)
 GITCONFIG="$THISDIR/gitconfig"
 
 mkdir -p ~/.config/git
 git config --global core.editor "${GITEDITOR:-nvim}"
 git config --global user.name "${GITNAME:-Jonathan Gin}"
-git config --global user.email "${GITEMAIL:-jonathangin52@github.com}"
 git config --global include.path "$GITCONFIG"

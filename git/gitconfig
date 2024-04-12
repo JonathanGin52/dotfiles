@@ -1,6 +1,3 @@
-[user]
-  name = Jonathan Gin
-  email = jonathangin52@github.com
 [core]
   editor = nvim
   excludesfile = ~/.gitignore_global
@@ -29,7 +26,6 @@
   ff = only
 [push]
   autoSetupRemote = true
-
 [delta]
   navigate = true    # use n and N to move between diff sections
   side-by-side = true # show side-by-side diffs
