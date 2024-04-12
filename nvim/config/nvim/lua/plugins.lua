@@ -22,8 +22,15 @@ vim.cmd([[
 return require("packer").startup(function(use)
   use("wbthomason/packer.nvim") -- packer can manage itself
 
-  -- Colour palate
-  use("rmehri01/onenord.nvim")
+  -- Colour theme
+  use({
+    "rmehri01/onenord.nvim",
+    config = function ()
+      require("onenord").setup({
+        styles = { comments = "italic" },
+      })
+    end
+  })
 
   -- UI Elements
   use({
@@ -35,16 +42,25 @@ return require("packer").startup(function(use)
     requires = "kyazdani42/nvim-web-devicons",
     config = [[require('config.bufferline')]],
   })
+
   -- Statusline
   use({
     "nvim-lualine/lualine.nvim",
-    requires = "kyazdani42/nvim-web-devicons",
+    requires = { "kyazdani42/nvim-web-devicons", opt = true },
+    after = "onenord.nvim",
     config = [[require('config.lualine')]],
   })
+
   -- File tree navigation
   use({
     "kyazdani42/nvim-tree.lua",
     requires = "kyazdani42/nvim-web-devicons",
+    config = function()
+      require("nvim-tree").setup({
+        filters = { custom = { "^.git$" } },
+        view = { width = 40 },
+      })
+    end,
   })
 
   -- Treesitter
@@ -55,6 +71,7 @@ return require("packer").startup(function(use)
       require("nvim-treesitter.install").update({ with_sync = true })
     end,
   })
+
   use({
     "nvim-treesitter/nvim-treesitter-textobjects",
     requires = "nvim-treesitter/nvim-treesitter",
@@ -85,6 +102,7 @@ return require("packer").startup(function(use)
   use({
     "L3MON4D3/LuaSnip",
     requires = "rafamadriz/friendly-snippets",
+    event = "InsertEnter",
     config = function()
       require("luasnip.loaders.from_vscode").lazy_load()
     end,
@@ -109,7 +127,9 @@ return require("packer").startup(function(use)
   use({
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
+    cmd = {"Mason"},
   })
+
   use({
     "neovim/nvim-lspconfig",
     config = [[require('config.lsp')]],
@@ -154,7 +174,6 @@ return require("packer").startup(function(use)
     config = [[require('config.toggleterm')]],
   })
 
-  --[[ === Trial plugins === ]]
   -- Colour
   use({
     "norcalli/nvim-colorizer.lua",
@@ -203,14 +222,11 @@ return require("packer").startup(function(use)
   -- Telescope
   use({
     "nvim-telescope/telescope.nvim",
-    branch = "0.1.x",
     requires = { "nvim-lua/popup.nvim", "nvim-lua/plenary.nvim", "nvim-telescope/telescope-fzy-native.nvim" },
     config = [[require('config.telescope')]],
   })
   use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
 
-  -- Test
-  -- use 'AndrewRadev/splitjoin.vim'
   use({
     "ggandor/leap.nvim",
     config = [[require('leap').add_default_mappings()]],
@@ -238,9 +254,7 @@ return require("packer").startup(function(use)
 
   use({
     "folke/noice.nvim",
-    config = function()
-      require("noice").setup()
-    end,
+    config = [[require("noice").setup()]],
     requires = {
       "MunifTanjim/nui.nvim",
       "rcarriga/nvim-notify",

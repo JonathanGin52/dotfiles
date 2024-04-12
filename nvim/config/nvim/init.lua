@@ -130,13 +130,6 @@ end
 
 -- Plugins
 require("plugins")
-require("nvim-tree").setup({
-  filters = { custom = { "^.git$" } },
-  view = { width = 40 },
-})
-require("onenord").setup({
-  styles = { comments = "italic" },
-})
 vim.cmd([[colorscheme onenord]])
 
 -- === vim-fugitive === --
