@@ -101,9 +101,11 @@ return require("packer").startup(function(use)
   use({
     "L3MON4D3/LuaSnip",
     requires = "rafamadriz/friendly-snippets",
-    event = "InsertEnter",
     config = function()
+       -- for friendly snippets
       require("luasnip.loaders.from_vscode").lazy_load()
+      -- for custom snippets
+      require("luasnip.loaders.from_vscode").lazy_load({paths = "./snippets"})
     end,
   })
 

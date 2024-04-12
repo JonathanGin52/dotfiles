@@ -1,0 +1,26 @@
+{
+  "Hash with default": {
+    "prefix": "hsh",
+    "body": ["Hash.new($0)"],
+    "description": "Hash with default"
+  },
+  "Hash with default object": {
+    "prefix": "hsho",
+    "body": ["Hash.new { |k, v| k[v] = $0 }"],
+    "description": "Hash with default object"
+  },
+  "Iterate 2d array": {
+    "prefix": "2d",
+    "body": [
+      "each_with_index do |row, i|",
+      "\trow.each_with_index do |${1:cell}, j|",
+      "\t$0",
+      "\tend",
+      "end"
+    ]
+  },
+  "DIRECTIONS": {
+    "prefix": "dir",
+    "body": ["DIRECTIONS = [[-1, 0], [0, 1], [1, 0], [0, -1]]"]
+  }
+}
