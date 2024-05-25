@@ -260,11 +260,6 @@ return require("packer").startup(function(use)
   })
 
   use({
-    "numToStr/Comment.nvim",
-    config = [[require('Comment').setup()]],
-  })
-
-  use({
     "folke/noice.nvim",
     config = [[require("noice").setup()]],
     requires = {
