@@ -1,0 +1,7 @@
+[core]
+	editor = nvim
+[user]
+	name = Jonathan Gin
+	email = jonathangin52@gmail.com
+[include]
+	path = /Users/jonathangin/src/jonathangin52/dotfiles/git/gitconfig
