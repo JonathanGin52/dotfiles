@@ -1,0 +1,80 @@
+[colors.bright]
+black = "0x4C566A"
+blue = "0x81A1C1"
+cyan = "0x8FBCBB"
+green = "0xA3BE8C"
+magenta = "0xB988B0"
+red = "0xBF616A"
+white = "0xECEFF4"
+yellow = "0xEBCB8B"
+
+[colors.hints.end]
+background = "#4C566A"
+foreground = "#81A1C1"
+
+[colors.hints.start]
+background = "#4C566A"
+foreground = "#B988B0"
+
+[colors.normal]
+black = "0x3B4252"
+blue = "0x81A1C1"
+cyan = "0x88C0D0"
+green = "0xA3BE8C"
+magenta = "0xB988B0"
+red = "0xBF616A"
+white = "0xE5E9F0"
+yellow = "0xEBCB8B"
+
+[colors.primary]
+background = "0x2E3440"
+foreground = "0xC8D0E0"
+
+[colors.search.focused_match]
+background = "#4C566A"
+foreground = "#EBCB8B"
+
+[colors.search.matches]
+background = "#4C566A"
+foreground = "#81A1C1"
+
+[colors.selection]
+background = "#434C5E"
+text = "CellForeground"
+
+[env]
+TERM = "xterm-256color"
+
+[font]
+size = 14.0
+
+[font.bold]
+family = "SauceCodePro Nerd Font"
+style = "Bold"
+
+[font.italic]
+family = "SauceCodePro Nerd Font"
+style = "Italic"
+
+[font.normal]
+family = "SauceCodePro Nerd Font"
+style = "Regular"
+
+[[keyboard.bindings]]
+chars = "\u0015"
+key = "Back"
+mods = "Command"
+
+[terminal.shell]
+args = ["--login", "-c", "tmux attach -t TMUX || tmux new -s TMUX"]
+# args = ["--login"]
+program = "/bin/zsh"
+
+[window]
+startup_mode = "Fullscreen"
+
+[window.padding]
+x = 4
+y = 3
+
+[terminal]
