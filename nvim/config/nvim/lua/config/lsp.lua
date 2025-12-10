@@ -1,34 +1,45 @@
-local nvim_lsp = require("lspconfig")
-local notify = require("notify")
+local lspconfig = require("lspconfig")
 
-require("mason").setup({
-  ui = {
-    icons = {
-      package_installed = "✓",
-      package_pending = "➜",
-      package_uninstalled = "✗",
-    },
-  },
-})
-require("mason-lspconfig").setup()
-
--- Mappings.
--- See `:help vim.diagnostic.*` for documentation on any of the below functions
+-- Global diagnostic keymaps
 local opts = { noremap = true, silent = true }
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, opts)
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
+vim.keymap.set("n", "[d", function() vim.diagnostic.jump({ count = -1 }) end, opts)
+vim.keymap.set("n", "]d", function() vim.diagnostic.jump({ count = 1 }) end, opts)
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, opts)
 
+-- Customize diagnostic display
+vim.diagnostic.config({
+  virtual_text = {
+    prefix = "●",
+    source = "if_many",
+  },
+  float = {
+    source = true,
+    border = "rounded",
+  },
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = " ",
+      [vim.diagnostic.severity.WARN] = " ",
+      [vim.diagnostic.severity.HINT] = "󰠠 ",
+      [vim.diagnostic.severity.INFO] = " ",
+    },
+  },
+  underline = true,
+  update_in_insert = false,
+  severity_sort = true,
+})
+
+-- LSP on_attach function
 local on_attach = function(client, bufnr)
-  notify(string.format("[lsp] %s\n[cwd] %s", client.name, vim.fn.getcwd()), "info", { title = "[lsp] Active" })
+  vim.notify(
+    string.format("[lsp] %s\n[cwd] %s", client.name, vim.fn.getcwd()),
+    vim.log.levels.INFO,
+    { title = "[lsp] Active" }
+  )
 
-  -- Enable completion triggered by <c-x><c-o>
-  vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
-
-  -- Mappings.
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
   local bufopts = { noremap = true, silent = true, buffer = bufnr }
+
   vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
   vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
   vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
